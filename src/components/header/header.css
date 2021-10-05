@@ -1,0 +1,12 @@
+.header {
+    display: flex;
+    justify-content: center;
+    height: 20vh;
+    width: 100%;
+    background-color: #F3F3FB;
+    border: 2px solid #ffffff;
+}
+.header h1 {
+    display: block;
+    margin: auto;
+}

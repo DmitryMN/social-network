@@ -1,0 +1,10 @@
+.appContainer {
+    max-width: 1110px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.headerContainer {
+    background-color: #536781;
+    background-size: cover;
+    background-position: center;
+}

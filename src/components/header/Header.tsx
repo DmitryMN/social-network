@@ -1,13 +1,14 @@
 import React from "react";
 
-function Headers() {
+function Header() {
     return(
         <header>
+            <h1>Social Networks</h1>
             <a href="#">Menu</a>
-            <a href="#">Users</a>
+            <a href="#">News Feed</a>
             <a href="#">Messages</a>
         </header>
     );
 }
 
-export default Headers;
+export default Header;

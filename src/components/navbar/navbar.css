@@ -1,0 +1,18 @@
+.navbar {
+    width: 150px;
+    background-color: #F3F3FB;
+    border-right: 2px solid #ffffff;
+}
+.navbar a {
+    display: block;
+    text-decoration: none;
+    margin-left: 10px;
+    margin-top: 10px;
+    color: #707C97;
+}
+.navbar a.active {
+    color: blue;
+}
+.navbar a:hover {
+    text-decoration: underline;
+}

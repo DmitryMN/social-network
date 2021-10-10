@@ -1,4 +1,5 @@
 import React from "react";
+import Post from "./post/Post";
 import "./profile.css";
 
 function Profile() {
@@ -6,10 +7,8 @@ function Profile() {
         <div className="profile_wrapper">
             <div className="logo">
             </div>
-            <div>It's my first post</div>
-            <div>Post about the car</div>
-            <div>My little post about wheels</div>
-            <div>Engines cars</div>
+            <div>ava + description</div>
+            <Post/>
         </div>
     );
 }

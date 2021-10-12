@@ -1,5 +1,5 @@
 import React from "react";
-import Post from "./post/Post";
+import ProfilePosts from "./profilePosts/ProfilePosts";
 import "./profile.css";
 
 function Profile() {
@@ -8,7 +8,7 @@ function Profile() {
             <div className="logo">
             </div>
             <div>ava + description</div>
-            <Post/>
+            <ProfilePosts/>
         </div>
     );
 }

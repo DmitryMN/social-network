@@ -1,0 +1,11 @@
+.profile_posts {
+    width: auto;
+    margin-top: 30px;
+}
+.profile_form_add_post {
+    display: block;
+}
+.posts_wrapper {
+    margin-top: 15px;
+    margin-left: 10px;
+}

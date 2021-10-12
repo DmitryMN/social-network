@@ -1,0 +1,9 @@
+.post {
+    display: block;
+}
+
+.post p {
+    display: block;
+    margin-left: 10px;
+    margin-top: 15px;
+}

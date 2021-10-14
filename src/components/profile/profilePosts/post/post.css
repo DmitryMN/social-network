@@ -1,5 +1,5 @@
 .post {
-    display: block;
+    display: flex;
 }
 
 .post p {

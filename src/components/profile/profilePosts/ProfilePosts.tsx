@@ -12,6 +12,8 @@ function ProfilePosts() {
             </div>
             <div className="posts_wrapper">
                <Post/>
+               <Post/>
+               <Post/>
             </div>
         </div>
     );

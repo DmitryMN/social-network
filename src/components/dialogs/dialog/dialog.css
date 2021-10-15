@@ -1,0 +1,12 @@
+.dialog_item {
+    border: 1px solid #F3F3FB;
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 14px;
+    background-color: #449AF4;
+    color: #ffffff;
+}
+.dialog_item p{
+    padding-left: 4px;
+}
+

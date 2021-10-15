@@ -8,6 +8,7 @@ function Post() {
         <div className="post">
             <img className="imageUser" src={userImg} alt="MyImage"/>
             <p>It's my first post</p>
+            <span>like</span>
         </div>
     );
 }

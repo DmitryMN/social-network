@@ -1,0 +1,25 @@
+.dialogs {
+    width: auto;
+}
+.dialogs_container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+.users_container {
+    width: 595px;
+    margin-left: 60px;
+}
+.user_post {
+    width: 850px;
+    height: 930px;
+    background-color: #fff;
+    margin-left: 65px;
+}
+.post_title {
+    background-color: #FAFBFF;
+    height: 111px;
+}
+.addMessage_container textarea{
+    display: block;
+}

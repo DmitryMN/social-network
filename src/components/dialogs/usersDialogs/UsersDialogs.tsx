@@ -1,14 +1,12 @@
 import React from "react";
 import "./usersDialogs.css";
+import {UserType} from "../../../redux/state";
 
 
-
-function UsersDialogs() {
+function UsersDialogs(props: UserType) {
     return(
-        <div className="users_dialogs">
-            <div>Alex</div>
-            <div>David</div>
-            <div>Ann</div>
+        <div key={props.id} className="users_dialogs">
+            <div>{props.user}</div>
         </div>
     );
 }

@@ -15,7 +15,7 @@ function App(props: StorageType) {
           <div className="main_wrapper">
               <Navbar/>
               <Route path="/profile" render={() => <Profile posts={props.state.profiles.posts} />}/>
-              <Route exact path="/dialogs" render={() => <Dialogs/>}/>
+              <Route exact path="/dialogs" render={() => <Dialogs users={props.state.dialogs.users} messages={props.state.dialogs.messages}/>}/>
           </div>
       </div>
   );

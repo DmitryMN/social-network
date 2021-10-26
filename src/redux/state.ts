@@ -5,12 +5,12 @@ export type PostType = {
     likesCount: number
 }
 
-type UserType = {
+export type UserType = {
     id: number
     user: string
 }
 
-type MessageType = {
+export type MessageType = {
     id: number
     message: string
 }
@@ -19,12 +19,12 @@ export type ProfilesType = {
     posts: Array<PostType>
 }
 
-type DialogsType = {
+export type DialogsType = {
     users: Array<UserType>
     messages: Array<MessageType>
 }
 
-type StateType = {
+export type StateType = {
     profiles: ProfilesType
     dialogs: DialogsType
 }

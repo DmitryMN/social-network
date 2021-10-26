@@ -2,14 +2,17 @@ import React from "react";
 import Dialog from "./dialog/Dialog";
 import UsersDialogs from "./usersDialogs/UsersDialogs";
 import "./dialogs.css";
+import {DialogsType} from "../../redux/state";
 
-function Dialogs() {
+function Dialogs(props: DialogsType) {
     return(
         <div className="dialogs">
             <div className="dialogs_container">
                 <div className="users_container">
                     <h3>Dialogs</h3>
-                    <UsersDialogs />
+                    {
+                        props.users.map(users => <UsersDialogs id={users.id} user={users.user}/>)
+                    }
                 </div>
                 <div className="user_post">
                     <div className="post_title">
@@ -19,7 +22,9 @@ function Dialogs() {
                         <textarea rows={2}></textarea>
                         <button>Add message</button>
                     </div>
-                    <Dialog />
+                    {
+                        props.messages.map(message => <Dialog id={message.id} message={message.message}/>)
+                    }
                 </div>
             </div>
         </div>

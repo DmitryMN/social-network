@@ -1,10 +1,11 @@
 import React from "react";
 import "./dialog.css";
+import {MessageType} from "../../../redux/state";
 
-function Dialog() {
+function Dialog(props: MessageType) {
     return(
-        <div className="dialog_item">
-            <p>Hello</p>
+        <div key={props.id} className="dialog_item">
+            <p>{props.message}</p>
         </div>
     );
 }

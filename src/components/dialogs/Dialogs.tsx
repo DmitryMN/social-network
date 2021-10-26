@@ -1,5 +1,6 @@
 import React from "react";
 import Dialog from "./dialog/Dialog";
+import UsersDialogs from "./usersDialogs/UsersDialogs";
 import "./dialogs.css";
 
 function Dialogs() {
@@ -7,8 +8,8 @@ function Dialogs() {
         <div className="dialogs">
             <div className="dialogs_container">
                 <div className="users_container">
-                    <h3>Chats</h3>
-
+                    <h3>Dialogs</h3>
+                    <UsersDialogs />
                 </div>
                 <div className="user_post">
                     <div className="post_title">

@@ -1,8 +1,9 @@
 import React from "react";
 import Post from "./post/Post";
-import "./profilePosts.css"
+import "./profilePosts.css";
+import {ProfilesType} from "../../../redux/state";
 
-function ProfilePosts() {
+function ProfilePosts(props: ProfilesType) {
     return(
         <div className="profile_posts">
             <h3>My posts</h3>
@@ -11,9 +12,9 @@ function ProfilePosts() {
                 <button>Add post</button>
             </div>
             <div className="posts_wrapper">
-               <Post/>
-               <Post/>
-               <Post/>
+                {
+                    props.posts.map(post => <Post id={post.id} post={post.post} likesCount={post.likesCount}/>)
+                }
             </div>
         </div>
     );

@@ -1,14 +1,15 @@
 import React from "react";
 import userImg from "../../../../images/user_img.png"
 import "./post.css";
+import {PostType} from "../../../../redux/state";
 
 
-function Post() {
+function Post(props: PostType) {
     return(
-        <div className="post">
+        <div key={props.id} className="post">
             <img className="imageUser" src={userImg} alt="MyImage"/>
-            <p>It's my first post</p>
-            <span>like</span>
+            <p>{props.id}: {props.post}</p>
+            <p>like: {props.likesCount}</p>
         </div>
     );
 }

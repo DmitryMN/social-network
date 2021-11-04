@@ -5,16 +5,21 @@ import './App.css';
 import Profile from "./components/profile/Profile";
 import Dialogs from "./components/dialogs/Dialogs";
 import {Route} from "react-router-dom";
-import {StorageType} from "./redux/state";
+import {StateType} from "./redux/state";
 
+type appPropsType = {
+    state: StateType
+    addPost: (post: string) => void
+    addNewPostText:(text: string) => void
+}
 
-function App(props: StorageType) {
+function App(props: appPropsType  ) {
   return (
       <div className="App">
           <HeaderContainer/>
           <div className="main_wrapper">
               <Navbar/>
-              <Route path="/profile" render={() => <Profile posts={props.state.profiles.posts} />}/>
+              <Route path="/profile" render={() => <Profile posts={props.state.profiles.posts} addPost={props.addPost} newPost={props.state.profiles.newPost} addNewPostText={props.addNewPostText}/>} />
               <Route exact path="/dialogs" render={() => <Dialogs users={props.state.dialogs.users} messages={props.state.dialogs.messages}/>}/>
           </div>
       </div>

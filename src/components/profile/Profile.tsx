@@ -1,15 +1,18 @@
 import React from "react";
 import ProfilePosts from "./profilePosts/ProfilePosts";
 import "./profile.css";
-import {ProfilesType} from "../../redux/state";
+import {profilesPropsType} from "../../redux/state";
 
-function Profile(props: ProfilesType) {
+
+
+
+function Profile(props: profilesPropsType) {
     return(
         <div className="profile_wrapper">
             <div className="logo">
             </div>
             <div>ava + description</div>
-            <ProfilePosts posts={props.posts}/>
+            <ProfilePosts posts={props.posts} addPost={props.addPost} newPost={props.newPost} addNewPostText={props.addNewPostText}/>
         </div>
     );
 }

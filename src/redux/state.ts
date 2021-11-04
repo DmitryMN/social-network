@@ -17,6 +17,7 @@ export type MessageType = {
 
 export type ProfilesType = {
     posts: Array<PostType>
+    newPost: string
 }
 
 export type DialogsType = {
@@ -33,6 +34,13 @@ export type StorageType = {
     state: StateType
 }
 
+export type profilesPropsType = {
+    posts: Array<PostType>
+    addPost: (post: string) => void
+    newPost: string
+    addNewPostText:(text: string) => void
+}
+
 export const storage: StorageType = {
 
     state: {
@@ -44,7 +52,8 @@ export const storage: StorageType = {
                 {id: 3, post: 'I am fine', likesCount: 5},
                 {id: 4, post: 'Good', likesCount: 8},
                 {id: 5, post: 'See you', likesCount: 3}
-            ]
+            ],
+            newPost: ""
         },
 
         dialogs: {
@@ -58,8 +67,32 @@ export const storage: StorageType = {
                 {id: 1, message: 'Hello, how are you'},
                 {id: 2, message: 'I am fine'},
                 {id: 3, message: 'Are you sleeping?'},
-                {id: 4, message: 'No'}
+                {id: 4, message: 'Yes it is'}
             ]
         }
     }
+}
+
+export const addPost = (post: string) => {
+    let newPost: PostType = {
+        id: 6,
+        post: post,
+        likesCount: 7
+    }
+    storage.state.profiles.posts.push(newPost);
+    renderEntireTree();
+}
+
+export const addNewPostText = (text: string) => {
+    console.log(text);
+    storage.state.profiles.newPost = text;
+    renderEntireTree();
+}
+
+let renderEntireTree = () => {
+
+}
+
+export const subscribe = (observer: () => void) => {
+    renderEntireTree = observer;
 }

@@ -5,22 +5,22 @@ import './App.css';
 import Profile from "./components/profile/Profile";
 import Dialogs from "./components/dialogs/Dialogs";
 import {Route} from "react-router-dom";
-import {StateType} from "./redux/state";
+import {StorageType} from "./redux/state";
+
 
 type appPropsType = {
-    state: StateType
-    addPost: (post: string) => void
-    addNewPostText:(text: string) => void
+    storage: StorageType
 }
 
-function App(props: appPropsType  ) {
+const App: React.FC<appPropsType> = (props) => {
+  const state = props.storage.getState();
   return (
       <div className="App">
           <HeaderContainer/>
           <div className="main_wrapper">
               <Navbar/>
-              <Route path="/profile" render={() => <Profile posts={props.state.profiles.posts} addPost={props.addPost} newPost={props.state.profiles.newPost} addNewPostText={props.addNewPostText}/>} />
-              <Route exact path="/dialogs" render={() => <Dialogs users={props.state.dialogs.users} messages={props.state.dialogs.messages}/>}/>
+              <Route path="/profile" render={() => <Profile posts={state.profiles.posts} addPost={props.storage.addPost.bind(props.storage)} newPost={state.profiles.newPost} addNewPostText={props.storage.addNewPostText.bind(props.storage)}/>} />
+              <Route exact path="/dialogs" render={() => <Dialogs users={state.dialogs.users} messages={state.dialogs.messages}/>}/>
           </div>
       </div>
   );

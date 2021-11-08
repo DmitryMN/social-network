@@ -32,6 +32,11 @@ export type StateType = {
 
 export type StorageType = {
     state: StateType
+    addPost: (post: string) => void
+    addNewPostText: (text: string) => void
+    renderEntireTree: () => void
+    subscribe: (observer: () => void) => void
+    getState: () => StateType
 }
 
 export type profilesPropsType = {
@@ -70,29 +75,55 @@ export const storage: StorageType = {
                 {id: 4, message: 'Yes it is'}
             ]
         }
+    },
+    addPost(post: string) {
+        let newPost: PostType = {
+            id: 6,
+            post: post,
+            likesCount: 7
+        }
+        this.state.profiles.posts.push(newPost);
+        this.renderEntireTree();
+    },
+
+    addNewPostText(text: string) {
+        this.state.profiles.newPost = text;
+        this.renderEntireTree();
+    },
+
+    renderEntireTree() {
+
+    },
+
+    subscribe(observer){
+        this.renderEntireTree = observer;
+    },
+
+    getState() {
+        return this.state
     }
-}
-
-export const addPost = (post: string) => {
-    let newPost: PostType = {
-        id: 6,
-        post: post,
-        likesCount: 7
-    }
-    storage.state.profiles.posts.push(newPost);
-    renderEntireTree();
-}
-
-export const addNewPostText = (text: string) => {
-    console.log(text);
-    storage.state.profiles.newPost = text;
-    renderEntireTree();
-}
-
-let renderEntireTree = () => {
 
 }
 
-export const subscribe = (observer: () => void) => {
-    renderEntireTree = observer;
-}
+// export const addPost = (post: string) => {
+//     let newPost: PostType = {
+//         id: 6,
+//         post: post,
+//         likesCount: 7
+//     }
+//     storage.state.profiles.posts.push(newPost);
+//     renderEntireTree();
+// }
+//
+// export const addNewPostText = (text: string) => {
+//     storage.state.profiles.newPost = text;
+//     renderEntireTree();
+// }
+//
+// let renderEntireTree = () => {
+//
+// }
+//
+// export const subscribe = (observer: () => void) => {
+//     renderEntireTree = observer;
+// }

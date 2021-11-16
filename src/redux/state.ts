@@ -110,7 +110,7 @@ export const storage: StorageType = {
         }
     },
     addPost(post: string) {
-        const newPost: PostType = {
+        let newPost: PostType = {
             id: 6,
             post: post,
             likesCount: 7
@@ -125,7 +125,7 @@ export const storage: StorageType = {
     },
 
     addNewMessage(messageText: string) {
-        const newMessage: MessageType = {
+        let newMessage: MessageType = {
             id: 5,
             message: messageText
         }

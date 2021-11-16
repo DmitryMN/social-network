@@ -2,7 +2,7 @@ import React, {ChangeEvent} from "react";
 import Dialog from "./dialog/Dialog";
 import UsersDialogs from "./usersDialogs/UsersDialogs";
 import "./dialogs.css";
-import {DialogsPropsType, addNewMessageAC, updateNewPostAC} from "../../redux/state";
+import {DialogsPropsType, addNewMessageAC, updateNewMessageAC } from "../../redux/state";
 
 const Dialogs = (props: DialogsPropsType) => {
 
@@ -11,7 +11,7 @@ const Dialogs = (props: DialogsPropsType) => {
     }
 
     const onChangeNewMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewPostAC(e.currentTarget.value));
+        props.dispatch(updateNewMessageAC(e.currentTarget.value));
     }
 
     return(
@@ -28,7 +28,7 @@ const Dialogs = (props: DialogsPropsType) => {
                         Max Volkov
                     </div>
                     <div className="addMessage_container">
-                        <textarea rows={2} value={props.newMessageText} onChange={onChangeNewMessageHandler}></textarea>
+                        <textarea rows={2} onChange={onChangeNewMessageHandler}/>
                         <button onClick={addMessageHandler}>Add message</button>
                     </div>
                     {

@@ -1,10 +1,19 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import Dialog from "./dialog/Dialog";
 import UsersDialogs from "./usersDialogs/UsersDialogs";
 import "./dialogs.css";
-import {DialogsType} from "../../redux/state";
+import {DialogsPropsType, addNewMessageAC, updateNewPostAC} from "../../redux/state";
 
-const Dialogs = (props: DialogsType) => {
+const Dialogs = (props: DialogsPropsType) => {
+
+    const addMessageHandler = () => {
+        props.dispatch({type: "ADD_NEW_MESSAGE", newText: props.newMessageText});
+    }
+
+    const onChangeNewMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch({type: "UPDATE_NEW_MESSAGE", newText: e.currentTarget.value});
+    }
+
     return(
         <div className="dialogs">
             <div className="dialogs_container">
@@ -19,8 +28,8 @@ const Dialogs = (props: DialogsType) => {
                         Max Volkov
                     </div>
                     <div className="addMessage_container">
-                        <textarea rows={2}></textarea>
-                        <button>Add message</button>
+                        <textarea rows={2} value={props.newMessageText} onChange={onChangeNewMessageHandler}></textarea>
+                        <button onClick={addMessageHandler}>Add message</button>
                     </div>
                     {
                         props.messages.map(message => <Dialog id={message.id} message={message.message}/>)

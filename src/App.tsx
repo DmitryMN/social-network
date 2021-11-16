@@ -19,8 +19,13 @@ const App: React.FC<appPropsType> = (props) => {
           <HeaderContainer/>
           <div className="main_wrapper">
               <Navbar/>
-              <Route path="/profile" render={() => <Profile posts={state.profiles.posts} newPost={state.profiles.newPost} dispatch={props.storage.dispatch.bind(props.storage)}/>} />
-              <Route exact path="/dialogs" render={() => <Dialogs users={state.dialogs.users} messages={state.dialogs.messages}/>}/>
+              <Route path="/profile" render={() => <Profile posts={state.profiles.posts}
+                                                            newPost={state.profiles.newPost}
+                                                            dispatch={props.storage.dispatch.bind(props.storage)}/>} />
+              <Route exact path="/dialogs" render={() => <Dialogs users={state.dialogs.users}
+                                                                  messages={state.dialogs.messages}
+                                                                  newMessageText={state.dialogs.newMessageText}
+                                                                  dispatch={props.storage.dispatch.bind(props.storage)}/>}/>
           </div>
       </div>
   );

@@ -7,11 +7,11 @@ import {DialogsPropsType, addNewMessageAC, updateNewPostAC} from "../../redux/st
 const Dialogs = (props: DialogsPropsType) => {
 
     const addMessageHandler = () => {
-        props.dispatch({type: "ADD_NEW_MESSAGE", newText: props.newMessageText});
+        props.dispatch(addNewMessageAC(props.newMessageText));
     }
 
     const onChangeNewMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: "UPDATE_NEW_MESSAGE", newText: e.currentTarget.value});
+        props.dispatch(updateNewPostAC(e.currentTarget.value));
     }
 
     return(

@@ -34,6 +34,7 @@ export type StorageType = {
     state: StateType
     addPost: (post: string) => void
     addNewPostText: (text: string) => void
+    dispatch: (action: ActionType) => void
     renderEntireTree: () => void
     subscribe: (observer: () => void) => void
     getState: () => StateType
@@ -41,10 +42,20 @@ export type StorageType = {
 
 export type profilesPropsType = {
     posts: Array<PostType>
-    addPost: (post: string) => void
+    dispatch: (action: ActionType) => void
     newPost: string
-    addNewPostText:(text: string) => void
+
 }
+
+export type ActionType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostAC>;
+
+export const addPostAC = (post: string) => {
+    return  {type: "ADD_POST", post: post} as const;
+};
+
+export const updateNewPostAC = (text: string) => {
+    return  {type: "UPDATE_NEW_POST", newText: text} as const;
+};
 
 export const storage: StorageType = {
 
@@ -91,6 +102,14 @@ export const storage: StorageType = {
         this.renderEntireTree();
     },
 
+    dispatch(action) {
+        if(action.type === "ADD_POST") {
+            this.addPost(action.post);
+        } else if(action.type === "UPDATE_NEW_POST") {
+            this.addNewPostText(action.newText);
+        }
+    },
+
     renderEntireTree() {
 
     },
@@ -105,25 +124,3 @@ export const storage: StorageType = {
 
 }
 
-// export const addPost = (post: string) => {
-//     let newPost: PostType = {
-//         id: 6,
-//         post: post,
-//         likesCount: 7
-//     }
-//     storage.state.profiles.posts.push(newPost);
-//     renderEntireTree();
-// }
-//
-// export const addNewPostText = (text: string) => {
-//     storage.state.profiles.newPost = text;
-//     renderEntireTree();
-// }
-//
-// let renderEntireTree = () => {
-//
-// }
-//
-// export const subscribe = (observer: () => void) => {
-//     renderEntireTree = observer;
-// }

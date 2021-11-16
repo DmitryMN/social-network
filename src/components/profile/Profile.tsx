@@ -6,13 +6,13 @@ import {profilesPropsType} from "../../redux/state";
 
 
 
-function Profile(props: profilesPropsType) {
+const Profile = (props: profilesPropsType) => {
     return(
         <div className="profile_wrapper">
             <div className="logo">
             </div>
             <div>ava + description</div>
-            <ProfilePosts posts={props.posts} addPost={props.addPost} newPost={props.newPost} addNewPostText={props.addNewPostText}/>
+            <ProfilePosts posts={props.posts} newPost={props.newPost} dispatch={props.dispatch}/>
         </div>
     );
 }

@@ -1,16 +1,16 @@
 import React, {ChangeEvent} from "react";
 import Post from "./post/Post";
 import "./profilePosts.css";
-import {profilesPropsType} from "../../../redux/state";
+import {profilesPropsType, addPostAC, updateNewPostAC} from "../../../redux/state";
 
-function ProfilePosts(props: profilesPropsType) {
+const ProfilePosts = (props: profilesPropsType) => {
 
     const onAddPostHandler = () => {
-        props.addPost(props.newPost);
+        props.dispatch(addPostAC(props.newPost))
     }
 
     const onChangePostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.addNewPostText(e.currentTarget.value);
+        props.dispatch(updateNewPostAC(e.currentTarget.value));
     }
 
     return(

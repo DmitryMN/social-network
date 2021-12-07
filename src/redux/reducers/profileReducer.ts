@@ -1,4 +1,4 @@
-import {PostType} from "../state";
+
 
 export type PostTypeA = {
     id: number
@@ -27,7 +27,7 @@ let initialState: InitialStatePostsType = {
 const profileReducer = (state: InitialStatePostsType = initialState, action: ActionsProfilesType): InitialStatePostsType => {
     switch (action.type) {
         case "ADD_POST":
-            const newPost: PostType = {
+            const newPost: PostTypeA = {
                 id: 6,
                 postText: action.postText,
                 likesCount: 7

@@ -22,7 +22,7 @@ const ProfilePosts = (props: profilesPropsType) => {
             </div>
             <div className="posts_wrapper">
                 {
-                    props.posts.map(post => <Post id={post.id} post={post.post} likesCount={post.likesCount}/>)
+                    props.posts.map(post => <Post id={post.id} postText={post.postText} likesCount={post.likesCount}/>)
                 }
             </div>
         </div>

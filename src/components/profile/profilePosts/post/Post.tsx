@@ -8,7 +8,7 @@ function Post(props: PostType) {
     return(
         <div key={props.id} className="post">
             <img className="imageUser" src={userImg} alt="MyImage"/>
-            <p>{props.id}: {props.post}</p>
+            <p>{props.id}: {props.postText}</p>
             <p>like: {props.likesCount}</p>
         </div>
     );

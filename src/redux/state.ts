@@ -1,7 +1,7 @@
 
 export type PostType = {
     id: number
-    post: string
+    postText: string
     likesCount: number
 }
 
@@ -17,7 +17,7 @@ export type MessageType = {
 
 export type ProfilesType = {
     posts: Array<PostType>
-    newPost: string
+    newText: string
 }
 
 export type DialogsType = {
@@ -62,8 +62,8 @@ export type ActionType = ReturnType<typeof addPostAC>
     | ReturnType<typeof addNewMessageAC>
     | ReturnType<typeof updateNewMessageAC>;
 
-export const addPostAC = (post: string) => {
-    return  {type: "ADD_POST", post: post} as const;
+export const addPostAC = (postText: string) => {
+    return  {type: "ADD_POST", postText: postText} as const;
 };
 
 export const updateNewPostAC = (text: string) => {
@@ -84,13 +84,13 @@ export const storage: StorageType = {
 
         profiles: {
             posts: [
-                {id: 1, post: 'Its my first post', likesCount: 12},
-                {id: 2, post: 'Hello, how are you', likesCount: 10},
-                {id: 3, post: 'I am fine', likesCount: 5},
-                {id: 4, post: 'Good', likesCount: 8},
-                {id: 5, post: 'See you', likesCount: 3}
+                {id: 1, postText: 'Its my first postText', likesCount: 12},
+                {id: 2, postText: 'Hello, how are you', likesCount: 10},
+                {id: 3, postText: 'I am fine', likesCount: 5},
+                {id: 4, postText: 'Good', likesCount: 8},
+                {id: 5, postText: 'See you', likesCount: 3}
             ],
-            newPost: ""
+            newText: ""
         },
 
         dialogs: {
@@ -109,10 +109,10 @@ export const storage: StorageType = {
             newMessageText: ""
         }
     },
-    addPost(post: string) {
+    addPost(postText: string) {
         let newPost: PostType = {
             id: 6,
-            post: post,
+            postText: postText,
             likesCount: 7
         }
         this.state.profiles.posts.push(newPost);
@@ -120,7 +120,7 @@ export const storage: StorageType = {
     },
 
     addNewPostText(text: string) {
-        this.state.profiles.newPost = text;
+        this.state.profiles.newText = text;
         this.renderEntireTree();
     },
 
@@ -140,7 +140,7 @@ export const storage: StorageType = {
 
     dispatch(action) {
         if(action.type === "ADD_POST") {
-            this.addPost(action.post);
+            this.addPost(action.postText);
         } else if(action.type === "UPDATE_NEW_POST") {
             this.addNewPostText(action.newText);
         } else if (action.type === "ADD_NEW_MESSAGE") {

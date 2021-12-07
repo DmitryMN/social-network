@@ -20,7 +20,7 @@ const App: React.FC<appPropsType> = (props) => {
           <div className="main_wrapper">
               <Navbar/>
               <Route path="/profile" render={() => <Profile posts={state.profiles.posts}
-                                                            newPost={state.profiles.newPost}
+                                                            newPost={state.profiles.newText}
                                                             dispatch={props.storage.dispatch.bind(props.storage)}/>} />
               <Route exact path="/dialogs" render={() => <Dialogs users={state.dialogs.users}
                                                                   messages={state.dialogs.messages}

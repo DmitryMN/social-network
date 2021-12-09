@@ -1,4 +1,6 @@
 
+
+
 export type PostType = {
     id: number
     postText: string

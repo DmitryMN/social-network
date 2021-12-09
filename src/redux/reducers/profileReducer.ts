@@ -24,7 +24,7 @@ let initialState: InitialStatePostsType = {
     newText: ""
 }
 
-const profileReducer = (state: InitialStatePostsType = initialState, action: ActionsProfilesType): InitialStatePostsType => {
+const profileReducer = (state: InitialStatePostsType, action: ActionsProfilesType): InitialStatePostsType => {
     switch (action.type) {
         case "ADD_POST":
             const newPost: PostTypeA = {
@@ -34,9 +34,9 @@ const profileReducer = (state: InitialStatePostsType = initialState, action: Act
             }
             return {...state, posts: [...state.posts, newPost]};
         case "UPDATE_NEW_POST":
-            return {...state, newText: action.newText}
+            return {...state, newText: action.newText};
         default:
-            return state
+            return state;
     }
 }
 

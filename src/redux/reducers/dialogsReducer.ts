@@ -1,18 +1,18 @@
-import {MessageType} from "../state";
 
-export type UserTypeA = {
+
+export type UserType = {
     id: number
     user: string
 }
 
-export type MessageTypeA = {
+export type MessageType = {
     id: number
     message: string
 }
 
 export type InitialStateDialogsType = {
-    users: Array<UserTypeA>
-    messages: Array<MessageTypeA>
+    users: Array<UserType>
+    messages: Array<MessageType>
     newMessageText: string
 }
 
@@ -34,10 +34,10 @@ let initialState: InitialStateDialogsType = {
     newMessageText: ""
 }
 
-export const dialogsReducer = (state: InitialStateDialogsType, action: ActionsDialogsType) => {
+export const dialogsReducer = (state: InitialStateDialogsType = initialState, action: ActionsDialogsType): InitialStateDialogsType => {
     switch (action.type) {
         case "ADD_NEW_MESSAGE":
-            const newMessage: MessageTypeA = {
+            const newMessage: MessageType = {
                 id: 5,
                 message: action.newText
             }

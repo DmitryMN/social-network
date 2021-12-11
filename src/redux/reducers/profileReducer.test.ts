@@ -1,8 +1,8 @@
-import profileReducer, {PostTypeA, InitialStatePostsType, addPostAC} from "./profileReducer";
+import profilesReducer, { InitialStateProfileType, addPostAC} from "./profileReducer";
 
 test("correct add newPost", () => {
     //data
-    let initialState: InitialStatePostsType = {
+    let initialState: InitialStateProfileType = {
         posts: [
             {id: 1, postText: 'Its my first postText', likesCount: 12},
             {id: 2, postText: 'Hello, how are you', likesCount: 10},
@@ -15,7 +15,7 @@ test("correct add newPost", () => {
 
     const newPostText = "it so good";
     // action
-    let result = profileReducer(initialState, addPostAC(newPostText));
+    let result = profilesReducer(initialState, addPostAC(newPostText));
     // expect
     expect(result.posts.length).toBe(6);
     expect(result.posts[5].postText).toBe("it so good");

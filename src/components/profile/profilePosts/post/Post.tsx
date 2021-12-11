@@ -1,7 +1,7 @@
 import React from "react";
 import userImg from "../../../../images/user_img.png"
 import "./post.css";
-import {PostType} from "../../../../redux/state";
+import {PostType} from "../../../../redux/reducers/profileReducer";
 
 
 function Post(props: PostType) {

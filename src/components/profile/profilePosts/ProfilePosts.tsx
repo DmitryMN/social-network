@@ -1,28 +1,29 @@
 import React, {ChangeEvent} from "react";
 import Post from "./post/Post";
 import "./profilePosts.css";
-import {profilesPropsType, addPostAC, updateNewPostAC} from "../../../redux/state";
+import {ProfilePropsTypeStDis} from "./ProfilePostsContainer";
 
-const ProfilePosts = (props: profilesPropsType) => {
+
+const ProfilePosts = (props: ProfilePropsTypeStDis) => {
 
     const onAddPostHandler = () => {
-        props.dispatch(addPostAC(props.newPost))
+        props.onAddPostHandler(props.profiles.newText);
     }
 
     const onChangePostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewPostAC(e.currentTarget.value));
+        props.onChangePostHandler(e.currentTarget.value);
     }
 
     return(
         <div className="profile_posts">
             <h3>My posts</h3>
             <div className="profile_form_add_post">
-                <textarea rows={2} value={props.newPost} onChange={onChangePostHandler}> </textarea>
+                <textarea rows={2} value={props.profiles.newText} onChange={onChangePostHandler}> </textarea>
                 <button onClick={onAddPostHandler}>Add post</button>
             </div>
             <div className="posts_wrapper">
                 {
-                    props.posts.map(post => <Post id={post.id} postText={post.postText} likesCount={post.likesCount}/>)
+                    props.profiles.posts.map(post => <Post id={post.id} postText={post.postText} likesCount={post.likesCount}/>)
                 }
             </div>
         </div>

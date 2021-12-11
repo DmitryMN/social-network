@@ -1,6 +1,6 @@
 import React from "react";
 import "./usersDialogs.css";
-import {UserType} from "../../../redux/state";
+import {UserType} from "../../../redux/reducers/dialogsReducer";
 
 
 const UsersDialogs = (props: UserType) => {

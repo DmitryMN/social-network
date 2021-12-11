@@ -2,16 +2,16 @@ import React, {ChangeEvent} from "react";
 import Dialog from "./dialog/Dialog";
 import UsersDialogs from "./usersDialogs/UsersDialogs";
 import "./dialogs.css";
-import {DialogsPropsType, addNewMessageAC, updateNewMessageAC } from "../../redux/state";
+import {DialogsPropsTypeStDis} from "./DialogsContainer";
 
-const Dialogs = (props: DialogsPropsType) => {
+const Dialogs = (props: DialogsPropsTypeStDis) => {
 
     const addMessageHandler = () => {
-        props.dispatch(addNewMessageAC(props.newMessageText));
+        props.addMessageHandler(props.dialogs.newMessageText);
     }
 
     const onChangeNewMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageAC(e.currentTarget.value));
+        props.onChangeNewMessageHandler(e.currentTarget.value);
     }
 
     return(
@@ -20,7 +20,7 @@ const Dialogs = (props: DialogsPropsType) => {
                 <div className="users_container">
                     <h3>Dialogs</h3>
                     {
-                        props.users.map(users => <UsersDialogs id={users.id} user={users.user}/>)
+                        props.dialogs.users.map(users => <UsersDialogs id={users.id} user={users.user}/>)
                     }
                 </div>
                 <div className="user_post">
@@ -32,7 +32,7 @@ const Dialogs = (props: DialogsPropsType) => {
                         <button onClick={addMessageHandler}>Add message</button>
                     </div>
                     {
-                        props.messages.map(message => <Dialog id={message.id} message={message.message}/>)
+                        props.dialogs.messages.map(message => <Dialog id={message.id} message={message.message}/>)
                     }
                 </div>
             </div>

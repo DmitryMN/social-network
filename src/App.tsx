@@ -3,29 +3,18 @@ import HeaderContainer from "./components/header/Header";
 import Navbar from "./components/navbar/Navbar";
 import './App.css';
 import Profile from "./components/profile/Profile";
-import Dialogs from "./components/dialogs/Dialogs";
 import {Route} from "react-router-dom";
-import {StorageType} from "./redux/state";
+import {DialogsContainer} from "./components/dialogs/DialogsContainer";
 
 
-type appPropsType = {
-    storage: StorageType
-}
-
-const App: React.FC<appPropsType> = (props) => {
-  const state = props.storage.getState();
+const App = () => {
   return (
       <div className="App">
           <HeaderContainer/>
           <div className="main_wrapper">
               <Navbar/>
-              <Route path="/profile" render={() => <Profile posts={state.profiles.posts}
-                                                            newPost={state.profiles.newText}
-                                                            dispatch={props.storage.dispatch.bind(props.storage)}/>} />
-              <Route exact path="/dialogs" render={() => <Dialogs users={state.dialogs.users}
-                                                                  messages={state.dialogs.messages}
-                                                                  newMessageText={state.dialogs.newMessageText}
-                                                                  dispatch={props.storage.dispatch.bind(props.storage)}/>}/>
+              <Route path="/profile" render={() => <Profile />} />
+              <Route exact path="/dialogs" render={() => <DialogsContainer />}/>
           </div>
       </div>
   );

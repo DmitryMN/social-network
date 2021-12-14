@@ -41,7 +41,7 @@ export const dialogsReducer = (state: InitialStateDialogsType = initialState, ac
                 id: 5,
                 message: action.newText
             }
-            return {...state, messages: [...state.messages, newMessage]};
+            return {...state, messages: [...state.messages, newMessage], newMessageText: ""};
         case "UPDATE_NEW_MESSAGE":
             return {...state, newMessageText: action.newText};
         default:

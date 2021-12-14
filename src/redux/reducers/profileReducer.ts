@@ -32,7 +32,7 @@ const profilesReducer = (state: InitialStateProfileType = initialState, action: 
                 postText: action.postText,
                 likesCount: 7
             }
-            return {...state, posts: [...state.posts, newPost]};
+            return {...state, posts: [...state.posts, newPost], newText: ""};
         case "UPDATE_NEW_TEXT":
             return {...state, newText: action.newText};
         default:

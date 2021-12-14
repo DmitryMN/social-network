@@ -1,0 +1,13 @@
+.users_page {
+    width: auto;
+}
+
+.users_container {
+    width: 700px;
+    margin-left: 80px;
+    margin-top: 50px;
+    color: #707C97;
+}
+.selected {
+    font-weight: bold;
+}

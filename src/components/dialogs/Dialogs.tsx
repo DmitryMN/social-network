@@ -28,7 +28,7 @@ const Dialogs = (props: DialogsPropsTypeStDis) => {
                         Max Volkov
                     </div>
                     <div className="addMessage_container">
-                        <textarea rows={2} onChange={onChangeNewMessageHandler}/>
+                        <textarea value={props.dialogs.newMessageText} rows={2} onChange={onChangeNewMessageHandler}/>
                         <button onClick={addMessageHandler}>Add message</button>
                     </div>
                     {

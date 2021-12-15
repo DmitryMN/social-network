@@ -17,6 +17,8 @@ export type InitialStateType = {
     users: Array<UsersType>
 }
 
+export type ActionUsersType = ReturnType<typeof followUnfolllowAC>
+
 const initialState: InitialStateType= {
     users: [
         {id: 1, followed: true, fullName: "Dmitrii", status: "I am a developer", location: {city: "Moscow", country: "Russia"}},
@@ -25,3 +27,20 @@ const initialState: InitialStateType= {
         {id: 4, followed: false, fullName: "Masha", status: "I am a student", location: {city: "Moscow", country: "Russia"}},
     ]
 }
+
+const usersReducer = (state: InitialStateType = initialState, action: ActionUsersType) => {
+    switch (action.type) {
+        case "FOLLOW-UNFOLLOW":
+            return {...state, users: state.users.map(user => {
+                    return user.id === action.id ? {...user, followed: !user.followed} : user;
+                })};
+        default:
+            return state;
+    }
+}
+
+export const followUnfolllowAC = (id: number) => {
+    return {type: "FOLLOW-UNFOLLOW", id: id} as const;
+}
+
+export default usersReducer;

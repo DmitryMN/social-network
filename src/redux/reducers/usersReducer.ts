@@ -14,10 +14,12 @@ export type UsersType = {
 }
 
 export type InitialStateType = {
-    users: Array<UsersType>
+    users: arrUsersType
 }
 
-export type ActionUsersType = ReturnType<typeof followUnfolllowAC>
+export type arrUsersType = Array<UsersType>;
+
+export type ActionUsersType = ReturnType<typeof followUnfolllowAC> | ReturnType<typeof setUsersAC>;
 
 const initialState: InitialStateType= {
     users: [
@@ -30,17 +32,23 @@ const initialState: InitialStateType= {
 
 const usersReducer = (state: InitialStateType = initialState, action: ActionUsersType) => {
     switch (action.type) {
-        case "FOLLOW-UNFOLLOW":
+        case "FOLLOW_UNFOLLOW":
             return {...state, users: state.users.map(user => {
                     return user.id === action.id ? {...user, followed: !user.followed} : user;
                 })};
+        case "SET_USERS":
+            return {...state, users: [...state.users, ...action.users]}
         default:
             return state;
     }
 }
 
 export const followUnfolllowAC = (id: number) => {
-    return {type: "FOLLOW-UNFOLLOW", id: id} as const;
+    return {type: "FOLLOW_UNFOLLOW", id: id} as const;
+}
+
+export const setUsersAC = (users: arrUsersType) => {
+    return {type: "SET_USERS", users: users} as const;
 }
 
 export default usersReducer;

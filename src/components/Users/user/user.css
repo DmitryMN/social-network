@@ -1,0 +1,57 @@
+.user_wrap_element {
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+    height: 150px;
+    background-color: white;
+    border: 2px solid #ffffff;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+.user_wrap_profile_icon_button {
+    width: 140px;
+}
+.user_wrap_image .image {
+    height: 60px;
+    width: 60px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.users_wrap_button .button {
+    margin-top: 20px;
+    margin-left: 10px;
+    width: 62px;
+}
+.user_wrap_profile {
+    display: flex;
+}
+.user_wrap_profile_name_status {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 225px;
+}
+.user_wrap_profile_country_city {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 225px;
+}
+.user_name {
+    height: 75px;
+    text-align: center;
+    padding: 15px;
+}
+.user_country {
+    height: 75px;
+    text-align: center;
+    padding: 15px;
+}
+.user_status {
+    text-align: center;
+    padding: 15px;
+}
+.user_city {
+    text-align: center;
+    padding: 15px;
+}

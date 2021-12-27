@@ -31,8 +31,8 @@ const User = (props: UserPropsType) => {
                     <div className="user_status">{props.status}</div>
                 </div>
                 <div className="user_wrap_profile_country_city">
-                    <div className="user_country">{props.location.country}</div>
-                    <div className="user_city">{props.location.city}</div>
+                    <div className="user_country">{"Belarus"}</div>
+                    <div className="user_city">{"Minsk"}</div>
                 </div>
             </div>
         </div>

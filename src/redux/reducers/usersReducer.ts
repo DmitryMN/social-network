@@ -10,7 +10,6 @@ export type UsersType = {
     followed: boolean
     name: string
     status: string
-    location: LocationType
 }
 
 export type InitialStateType = {

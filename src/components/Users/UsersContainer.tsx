@@ -10,7 +10,7 @@ type MapStateToPropsType = {
 }
 
 export type MapDispatchToPropsType = {
-    setNewUsersHandler: (users: arrUsersType) => void
+    setNewUsers: (users: arrUsersType) => void
     onChangeFollowUnfollow: (id: number) => void
 }
 
@@ -22,7 +22,7 @@ const mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType  => {
     return {
-        setNewUsersHandler: (users: arrUsersType) => {
+        setNewUsers: (users: arrUsersType) => {
             dispatch(setUsersAC(users));
         },
         onChangeFollowUnfollow: (id: number) => {

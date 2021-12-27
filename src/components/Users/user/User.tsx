@@ -1,11 +1,13 @@
 import React from "react";
-import {MapDispatchToPropsType} from "../UsersContainer";
 import {UsersType} from "../../../redux/reducers/usersReducer";
 import "./user.css";
 import userImg from "../../../images/user_img.png";
 
+type MapDispatchToPropsType1 = {
+    onChangeFollowUnfollow: (id: number) => void
+}
 
-type UserPropsType = UsersType & MapDispatchToPropsType;
+type UserPropsType = UsersType & MapDispatchToPropsType1;
 
 const User = (props: UserPropsType) => {
     console.log("render component user");
@@ -25,7 +27,7 @@ const User = (props: UserPropsType) => {
             </div>
             <div className="user_wrap_profile">
                 <div className="user_wrap_profile_name_status">
-                    <div className="user_name">{props.fullName}</div>
+                    <div className="user_name">{props.name}</div>
                     <div className="user_status">{props.status}</div>
                 </div>
                 <div className="user_wrap_profile_country_city">

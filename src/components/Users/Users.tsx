@@ -2,24 +2,35 @@ import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 import User from "./user/User";
 import "./users.css";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import { type } from "os";
+
+
+type UserApiItemsType = {
+    id: number
+    name: string
+    uniqueUrlName: any
+    photos: {
+        small: string
+        large: string
+    }
+    status: any
+    followed: boolean
+}
+
+type AaType = {
+    items: Array<UserApiItemsType>
+}
 
 const Users = (props: UsersPropsType) => {
-
     if(props.users.users.length === 0) {
 
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(
+        axios.get<AaType>("https://social-network.samuraijs.com/api/1.0/users").then(
             response => {
+                debugger
                 props.setNewUsers(response.data.items);
             }
         );
-        //
-        // props.setNewUsers([
-        //     {id: 1, followed: true, name: "Dmitrii", status: "I am a developer",},
-        //     {id: 2, followed: true, name: "Alex", status: "I am a doctor",},
-        //     {id: 3, followed: false, name: "Boris", status: "I am a manager"},
-        //     {id: 4, followed: false, name: "Masha", status: "I am a student"},
-        // ]);
     }
 
     return(

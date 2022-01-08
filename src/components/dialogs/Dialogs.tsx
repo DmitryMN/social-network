@@ -4,40 +4,46 @@ import UsersDialogs from "./usersDialogs/UsersDialogs";
 import "./dialogs.css";
 import {DialogsPropsTypeStDis} from "./DialogsContainer";
 
-const Dialogs = (props: DialogsPropsTypeStDis) => {
+class Dialogs extends React.Component<DialogsPropsTypeStDis>{
 
-    const addMessageHandler = () => {
-        props.addMessageHandler(props.dialogs.newMessageText);
+    constructor(props: DialogsPropsTypeStDis) {
+        super(props);
     }
 
-    const onChangeNewMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.onChangeNewMessageHandler(e.currentTarget.value);
+    addMessageHandler = () => {
+        this.props.addMessageHandler(this.props.dialogs.newMessageText);
     }
 
-    return(
-        <div className="dialogs">
-            <div className="dialogs_container">
-                <div className="users_container">
-                    <h3>Dialogs</h3>
-                    {
-                        props.dialogs.users.map(users => <UsersDialogs id={users.id} user={users.user}/>)
-                    }
-                </div>
-                <div className="user_post">
-                    <div className="post_title">
-                        Max Volkov
+    onChangeNewMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        this.props.onChangeNewMessageHandler(e.currentTarget.value);
+    }
+
+    render() {
+        return(
+            <div className="dialogs">
+                <div className="dialogs_container">
+                    <div className="users_container">
+                        <h3>Dialogs</h3>
+                        {
+                            this.props.dialogs.users.map(users => <UsersDialogs id={users.id} user={users.user}/>)
+                        }
                     </div>
-                    <div className="addMessage_container">
-                        <textarea value={props.dialogs.newMessageText} rows={2} onChange={onChangeNewMessageHandler}/>
-                        <button onClick={addMessageHandler}>Add message</button>
+                    <div className="user_post">
+                        <div className="post_title">
+                            Max Volkov
+                        </div>
+                        <div className="addMessage_container">
+                            <textarea value={this.props.dialogs.newMessageText} rows={2} onChange={this.onChangeNewMessageHandler}/>
+                            <button onClick={this.addMessageHandler}>Add message</button>
+                        </div>
+                        {
+                            this.props.dialogs.messages.map(message => <Dialog id={message.id} message={message.message}/>)
+                        }
                     </div>
-                    {
-                        props.dialogs.messages.map(message => <Dialog id={message.id} message={message.message}/>)
-                    }
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default Dialogs;

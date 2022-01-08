@@ -3,12 +3,19 @@ import "./usersDialogs.css";
 import {UserType} from "../../../redux/reducers/dialogsReducer";
 
 
-const UsersDialogs = (props: UserType) => {
-    return(
-        <div key={props.id} className="users_dialogs">
-            <div>{props.user}</div>
-        </div>
-    );
+class UsersDialogs extends React.Component<UserType> {
+
+    constructor(props: UserType) {
+        super(props);
+    }
+
+    render() {
+        return(
+            <div key={this.props.id} className="users_dialogs">
+                <div>{this.props.user}</div>
+            </div>
+        );
+    }
 }
 
 export default UsersDialogs;

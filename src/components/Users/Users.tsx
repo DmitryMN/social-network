@@ -10,13 +10,13 @@ class Users extends React.Component<UsersPropsType> {
         super(props);
     }
 
-    // if(props.users.users.length === 0) {
-    //     axios.get("https://social-network.samuraijs.com/api/1.0/users").then(
-    //         response => {
-    //             props.setNewUsers(response.data.items);
-    //         }
-    //     );
-    // }
+    componentDidMount() {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(
+            response => {
+                this.props.setNewUsers(response.data.items);
+            }
+        );
+    }
 
     render() {
         return(

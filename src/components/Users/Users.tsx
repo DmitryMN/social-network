@@ -11,7 +11,7 @@ class Users extends React.Component<UsersPropsType> {
     }
 
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${this.props.users.totalUsersCount}&page=${this.props.users.currentPage}`).then(
             response => {
                 this.props.setNewUsers(response.data.items);
             }

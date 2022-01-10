@@ -1,4 +1,4 @@
-import usersReducer, {UsersType, InitialStateType, followUnfolllowAC, arrUsersType, setUsersAC} from "./usersReducer";
+import usersReducer, {InitialStateType, followUnfolllowAC, arrUsersType, setUsersAC, setCurrentPageAC} from "./usersReducer";
 
 test("correct follow user", () => {
     //data
@@ -43,4 +43,22 @@ test("correct set new users", () => {
     expect(result.users.length).toBe(6);
     expect(result.users[5].name).toBe("Bob");
 })
+
+test("correct current page", () => {
+    //data
+    const initialState: InitialStateType= {
+        users: [
+            {id: 1, followed: true, name: "Dmitrii", status: "I am a developer"},
+            {id: 2, followed: true, name: "Alex", status: "I am a doctor"},
+            {id: 3, followed: false, name: "Boris", status: "I am a manager"},
+            {id: 4, followed: false, name: "Masha", status: "I am a student"},
+        ],
+        pageSize: 10,
+        totalUsersCount: 100,
+        currentPage: 1
+    }
+    let result = usersReducer(initialState, setCurrentPageAC(2));
+    //expect
+    expect(result.currentPage).toBe(2);
+});
 

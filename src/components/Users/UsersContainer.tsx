@@ -17,7 +17,9 @@ export type MapDispatchToPropsType = {
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType;
 
 const mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
-    return { users: state.users }
+    return {
+        users: state.users
+    }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType  => {

@@ -14,6 +14,9 @@ export type UsersType = {
 
 export type InitialStateType = {
     users: arrUsersType
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 export type arrUsersType = Array<UsersType>;
@@ -21,8 +24,10 @@ export type arrUsersType = Array<UsersType>;
 export type ActionUsersType = ReturnType<typeof followUnfolllowAC> | ReturnType<typeof setUsersAC>;
 
 const initialState: InitialStateType= {
-    users: [
-    ]
+    users: [],
+    pageSize: 10,
+    totalUsersCount: 100,
+    currentPage: 1
 }
 
 const usersReducer = (state: InitialStateType = initialState, action: ActionUsersType) => {

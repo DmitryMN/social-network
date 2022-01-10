@@ -40,8 +40,8 @@ test("correct set new users", () => {
     // action
     let result = usersReducer(initialState, setUsersAC(newUsers));
     //expect
-    expect(result.users.length).toBe(6);
-    expect(result.users[5].name).toBe("Bob");
+    expect(result.users.length).toBe(2);
+    expect(result.users[1].name).toBe("Bob");
 })
 
 test("correct current page", () => {

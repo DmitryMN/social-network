@@ -11,11 +11,15 @@ class Users extends React.Component<UsersPropsType> {
     }
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${this.props.users.totalUsersCount}&page=${this.props.users.currentPage}`).then(
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${this.props.users.pageSize}&page=${this.props.users.currentPage}`).then(
             response => {
                 this.props.setNewUsers(response.data.items);
             }
         );
+    }
+
+    setCurrentPageHandler(currentPage: number) {
+        this.props.setCurrentPage(currentPage);
     }
 
     render() {
@@ -30,7 +34,8 @@ class Users extends React.Component<UsersPropsType> {
                 <p>Users:</p>
                 <div className="users_container">
                     <div>
-                        {pages.map(page => <span className={this.props.users.currentPage === page ? "selected" : ""}>{page}</span>)}
+                        {pages.map(page => <span className={this.props.users.currentPage === page ? "selected" : ""}
+                                                 onClick={ () => {this.setCurrentPageHandler(page)}}>{page}</span>)}
                     </div>
                     {
                         this.props.users.users.map(user => <User key={user.id} id={user.id}

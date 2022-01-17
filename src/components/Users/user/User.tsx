@@ -9,40 +9,35 @@ type MapDispatchToPropsType1 = {
 
 type UserPropsType = UsersType & MapDispatchToPropsType1;
 
-class User extends React.Component<UserPropsType> {
+const User = (props: UserPropsType) => {
 
-    constructor(props: UserPropsType) {
-        super(props);
+    const followUnfollowHandler = (id: number) => {
+        props.onChangeFollowUnfollow(id);
     }
 
-    followUnfollowHandler = (id: number) => {
-        this.props.onChangeFollowUnfollow(id);
-    }
-
-    render() {
-        return(
-            <div className="user_wrap_element">
-                <div className="user_wrap_profile_icon_button">
-                    <div className="user_wrap_image">
-                        <img className="image" src={userImg} alt="img"/>
-                    </div>
-                    <div className="users_wrap_button">
-                        <button className="button" onClick={() => this.followUnfollowHandler(this.props.id)}>{this.props.followed ? "Follow" : "Unfollow"}</button>
-                    </div>
+    return (
+        <div className="user_wrap_element">
+            <div className="user_wrap_profile_icon_button">
+                <div className="user_wrap_image">
+                    <img className="image" src={userImg} alt="img"/>
                 </div>
-                <div className="user_wrap_profile">
-                    <div className="user_wrap_profile_name_status">
-                        <div className="user_name">{this.props.name}</div>
-                        <div className="user_status">{this.props.status}</div>
-                    </div>
-                    <div className="user_wrap_profile_country_city">
-                        <div className="user_country">{"Belarus"}</div>
-                        <div className="user_city">{"Minsk"}</div>
-                    </div>
+                <div className="users_wrap_button">
+                    <button className="button"
+                            onClick={() => followUnfollowHandler(props.id)}>{props.followed ? "Follow" : "Unfollow"}</button>
                 </div>
             </div>
-        );
-    }
+            <div className="user_wrap_profile">
+                <div className="user_wrap_profile_name_status">
+                    <div className="user_name">{props.name}</div>
+                    <div className="user_status">{props.status}</div>
+                </div>
+                <div className="user_wrap_profile_country_city">
+                    <div className="user_country">{"Belarus"}</div>
+                    <div className="user_city">{"Minsk"}</div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default User;

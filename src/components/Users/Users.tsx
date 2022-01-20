@@ -7,12 +7,14 @@ type UsersPropsType = {
     users: InitialStateType
     onChangeFollowUnfollow: (id: number) => void
     setCurrentPage: (currentPage: number) => void
+    onPageChanged: (pageNumber: number) => void
 }
 
 const Users = (props: UsersPropsType) => {
 
     const setCurrentPageHandler = (currentPage: number) => {
         props.setCurrentPage(currentPage);
+        props.onPageChanged(currentPage);
     }
 
     let pagesCount = Math.ceil(props.users.totalUsersCount / props.users.pageSize);

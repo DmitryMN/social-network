@@ -18,6 +18,7 @@ export type InitialStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 export type arrUsersType = Array<UsersType>;
@@ -28,7 +29,8 @@ const initialState: InitialStateType= {
     users: [],
     pageSize: 10,
     totalUsersCount: 100,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 const usersReducer = (state: InitialStateType = initialState, action: ActionUsersType) => {

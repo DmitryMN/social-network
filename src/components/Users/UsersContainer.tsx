@@ -11,7 +11,7 @@ type MapStateToPropsType = {
 }
 
 export type MapDispatchToPropsType = {
-    setNewUsers: (users: arrUsersType) => void
+    setUsers: (users: arrUsersType) => void
     onChangeFollowUnfollow: (id: number) => void
     setCurrentPage: (currentPage: number) => void
 }
@@ -22,19 +22,28 @@ export type UsersApiComponentType = MapStateToPropsType & MapDispatchToPropsType
 class UsersApiComponent extends React.Component<UsersApiComponentType> {
     constructor(props: UsersApiComponentType) {
         super(props);
+        this.onPageChanged = this.onPageChanged.bind(this);
     }
 
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${this.props.users.pageSize}&page=${this.props.users.currentPage}`).then(
             response => {
-                this.props.setNewUsers(response.data.items);
+                this.props.setUsers(response.data.items);
             }
         );
     }
 
+    onPageChanged(pageNumber: number) {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${this.props.users.pageSize}&page=${pageNumber}`).then(
+            response => {
+                this.props.setUsers(response.data.items)
+            }
+        )
+    }
+
     render() {
         return (
-            <Users users={this.props.users} onChangeFollowUnfollow={this.props.onChangeFollowUnfollow} setCurrentPage={this.props.setCurrentPage} />
+            <Users users={this.props.users} onChangeFollowUnfollow={this.props.onChangeFollowUnfollow} setCurrentPage={this.props.setCurrentPage} onPageChanged={this.onPageChanged}/>
         );
     }
 }
@@ -47,7 +56,7 @@ const mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType  => {
     return {
-        setNewUsers: (users: arrUsersType) => {
+        setUsers: (users: arrUsersType) => {
             dispatch(setUsersAC(users));
         },
         onChangeFollowUnfollow: (id: number) => {

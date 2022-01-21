@@ -2,6 +2,7 @@ import React from "react";
 import User from "./user/User";
 import "./users.css";
 import {InitialStateType} from "../../redux/reducers/usersReducer";
+import Preloader from "../preloader/Preloader";
 
 type UsersPropsType = {
     users: InitialStateType
@@ -27,6 +28,7 @@ const Users = (props: UsersPropsType) => {
         <div className="users_page">
             <p>Users:</p>
             <div className="users_container">
+                {props.users.isFetching && <Preloader />}
                 <div>
                     {pages.map(page => <span className={props.users.currentPage === page ? "selected" : ""}
                                              onClick={() => {

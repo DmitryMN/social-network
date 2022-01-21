@@ -23,7 +23,7 @@ export type InitialStateType = {
 
 export type arrUsersType = Array<UsersType>;
 
-export type ActionUsersType = ReturnType<typeof followUnfolllowAC> | ReturnType<typeof setUsersAC> | ReturnType<typeof setCurrentPageAC>;
+export type ActionUsersType = ReturnType<typeof followUnfolllowAC> | ReturnType<typeof setUsersAC> | ReturnType<typeof setCurrentPageAC> | ReturnType<typeof setIsFetchingAC>;
 
 const initialState: InitialStateType= {
     users: [],
@@ -43,6 +43,8 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionUser
                 })};
         case "SET_CURRENT_PAGE":
             return {...state, currentPage: action.currentPage};
+        case "SET_IS_FETCHING":
+            return {...state, isFetching: !state.isFetching}   
         default:
             return state;
     }
@@ -58,6 +60,10 @@ export const setUsersAC = (users: arrUsersType) => {
 
 export const setCurrentPageAC = (currentPage: number) => {
     return  {type: "SET_CURRENT_PAGE", currentPage: currentPage} as const;
+}
+
+export const setIsFetchingAC = () => {
+    return {type: "SET_IS_FETCHING"} as const;
 }
 
 export default usersReducer;

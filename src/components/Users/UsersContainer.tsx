@@ -1,5 +1,5 @@
 import React from "react";
-import {InitialStateType, setUsersAC, followUnfolllowAC, arrUsersType, setCurrentPageAC} from "../../redux/reducers/usersReducer";
+import {InitialStateType, setUsersAC, followUnfolllowAC, arrUsersType, setCurrentPageAC, setIsFetchingAC} from "../../redux/reducers/usersReducer";
 import {rootReducerType} from "../../redux/store/redux_store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
@@ -14,6 +14,7 @@ export type MapDispatchToPropsType = {
     setUsers: (users: arrUsersType) => void
     onChangeFollowUnfollow: (id: number) => void
     setCurrentPage: (currentPage: number) => void
+    setIsFetching: () => void
 }
 
 export type UsersApiComponentType = MapStateToPropsType & MapDispatchToPropsType;
@@ -26,17 +27,21 @@ class UsersApiComponent extends React.Component<UsersApiComponentType> {
     }
 
     componentDidMount() {
+        this.props.setIsFetching();
         axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${this.props.users.pageSize}&page=${this.props.users.currentPage}`).then(
             response => {
                 this.props.setUsers(response.data.items);
+                this.props.setIsFetching();
             }
         );
     }
 
     onPageChanged(pageNumber: number) {
+        this.props.setIsFetching();
         axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${this.props.users.pageSize}&page=${pageNumber}`).then(
             response => {
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(response.data.items);
+                this.props.setIsFetching();
             }
         )
     }
@@ -64,6 +69,9 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType  => {
         },
         setCurrentPage: (currentPage: number) => {
             dispatch(setCurrentPageAC(currentPage))
+        },
+        setIsFetching: () => {
+            dispatch(setIsFetchingAC());
         }
     }
 }

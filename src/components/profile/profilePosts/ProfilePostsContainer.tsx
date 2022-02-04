@@ -20,15 +20,17 @@ const mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
     return  { profiles: state.profiles }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-    return {
-        onAddPostHandler: (postText: string) => {
-            dispatch(addPostAC(postText));
-        },
-        onChangePostHandler: (value: string) => {
-            dispatch(updateNewTextAC(value));
-        }
-    }
-}
+// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+//     return {
+//         onAddPostHandler: (postText: string) => {
+//             dispatch(addPostAC(postText));
+//         },
+//         onChangePostHandler: (value: string) => {
+//             dispatch(updateNewTextAC(value));
+//         }
+//     }
+// }
 
-export const ProfilePostContainer = connect(mapStateToProps, mapDispatchToProps)(ProfilePosts)
+export const ProfilePostContainer = connect(mapStateToProps, {
+    onAddPostHandler: addPostAC, onChangePostHandler: updateNewTextAC
+})(ProfilePosts)

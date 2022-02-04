@@ -35,7 +35,6 @@ class UsersApiComponent extends React.Component<UsersApiComponentType> {
             }
         );
     }
-
     onPageChanged(pageNumber: number) {
         this.props.setIsFetching();
         axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${this.props.users.pageSize}&page=${pageNumber}`).then(
@@ -45,7 +44,6 @@ class UsersApiComponent extends React.Component<UsersApiComponentType> {
             }
         )
     }
-
     render() {
         return (
             <Users users={this.props.users} onChangeFollowUnfollow={this.props.onChangeFollowUnfollow} setCurrentPage={this.props.setCurrentPage} onPageChanged={this.onPageChanged}/>
@@ -58,22 +56,24 @@ const mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
         users: state.users
     }
 }
+// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType  => {
+//     return {
+//         setUsers: (users: arrUsersType) => {
+//             dispatch(setUsersAC(users));
+//         },
+//         onChangeFollowUnfollow: (id: number) => {
+//             dispatch(followUnfolllowAC(id));
+//         },
+//         setCurrentPage: (currentPage: number) => {
+//             dispatch(setCurrentPageAC(currentPage))
+//         },
+//         setIsFetching: () => {
+//             dispatch(setIsFetchingAC());
+//         }
+//     }
+// }
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType  => {
-    return {
-        setUsers: (users: arrUsersType) => {
-            dispatch(setUsersAC(users));
-        },
-        onChangeFollowUnfollow: (id: number) => {
-            dispatch(followUnfolllowAC(id));
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setIsFetching: () => {
-            dispatch(setIsFetchingAC());
-        }
-    }
-}
-
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersApiComponent);
+export const UsersContainer = connect(mapStateToProps, {
+    setUsers: setUsersAC, onChangeFollowUnfollow: followUnfolllowAC,
+    setCurrentPage: setCurrentPageAC, setIsFetching: setIsFetchingAC
+})(UsersApiComponent);

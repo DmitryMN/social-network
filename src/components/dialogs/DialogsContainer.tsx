@@ -32,4 +32,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps  => {
     }
 }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+export const DialogsContainer = connect(mapStateToProps, {
+    addMessageHandler: addNewMessageAC, onChangeNewMessageHandler: updateNewMessageAC
+})(Dialogs);

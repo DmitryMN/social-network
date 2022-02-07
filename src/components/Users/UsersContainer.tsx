@@ -1,7 +1,6 @@
 import React from "react";
 import {InitialStateType, setUsersAC, followUnfolllowAC, arrUsersType, setCurrentPageAC, setIsFetchingAC} from "../../redux/reducers/usersReducer";
 import {rootReducerType} from "../../redux/store/redux_store";
-import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import Users from "./Users";
 import axios from "axios";

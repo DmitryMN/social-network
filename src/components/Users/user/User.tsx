@@ -2,6 +2,7 @@ import React from "react";
 import {UsersType} from "../../../redux/reducers/usersReducer";
 import "./user.css";
 import userImg from "../../../images/user_img.png";
+import {NavLink} from "react-router-dom";
 
 type MapDispatchToPropsType1 = {
     onChangeFollowUnfollow: (id: number) => void
@@ -19,7 +20,9 @@ const User = (props: UserPropsType) => {
         <div className="user_wrap_element">
             <div className="user_wrap_profile_icon_button">
                 <div className="user_wrap_image">
-                    <img className="image" src={userImg} alt="img"/>
+                    <NavLink to={"/profile/" + props.id}>
+                        <img className="image" src={userImg} alt="img"/>
+                    </NavLink>
                 </div>
                 <div className="users_wrap_button">
                     <button className="button"

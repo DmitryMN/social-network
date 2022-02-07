@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import ProfilePosts from "./ProfilePosts";
 import {rootReducerType} from "../../../redux/store/redux_store";
 import {InitialStateProfileType, addPostAC, updateNewTextAC} from "../../../redux/reducers/profileReducer";
-import {Dispatch} from "redux";
 
 type MapDispatchToPropsType = {
     onAddPostHandler: (postText: string) => void

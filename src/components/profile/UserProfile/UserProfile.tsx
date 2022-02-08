@@ -1,11 +1,16 @@
 import React from "react";
+import { ProfileUserNullType } from "../ProfileUserContainer";
+import Preloader from "../../preloader/Preloader";
 
-export const UserProfile = () => {
+export const UserProfile = ({profiles}: ProfileUserNullType) => {
+    if(!profiles) {
+        return <Preloader />
+    }
     return (
         <div className="user_profile">
             <div className="logo">
             </div>
-            <div>ava + description</div>
+            <div>{profiles ? profiles.aboutMe: "is empty"}</div>
         </div>
     );
 }

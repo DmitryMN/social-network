@@ -1,6 +1,6 @@
 
 
-export type ProfileType = {
+export type ProfileUserType = {
     userId: number
     fullName: string
     aboutMe: string
@@ -16,7 +16,7 @@ export type PostType = {
 export type InitialStateProfileType = {
     posts: Array<PostType>
     newText: string
-    profile: ProfileType | null
+    profile: ProfileUserType | null
 }
 
 export type ActionsProfilesType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewTextAC> | ReturnType<typeof setUserProfileAC>;
@@ -60,7 +60,7 @@ export const updateNewTextAC = (text: string) => {
     return  {type: "UPDATE_NEW_TEXT", newText: text} as const;
 };
 
-export const setUserProfileAC = (profile: ProfileType) => {
+export const setUserProfileAC = (profile: ProfileUserType) => {
     return {type: "SET_USER_PROFILE", profile} as const;
 }
 

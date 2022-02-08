@@ -1,5 +1,12 @@
 
 
+export type ProfileType = {
+    userId: number
+    fullName: string
+    aboutMe: string
+    lookingForAJob: boolean
+}
+
 export type PostType = {
     id: number
     postText: string
@@ -9,9 +16,10 @@ export type PostType = {
 export type InitialStateProfileType = {
     posts: Array<PostType>
     newText: string
+    profile: ProfileType | null
 }
 
-export type ActionsProfilesType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewTextAC>;
+export type ActionsProfilesType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewTextAC> | ReturnType<typeof setUserProfileAC>;
 
 const initialState: InitialStateProfileType = {
     posts: [
@@ -21,7 +29,9 @@ const initialState: InitialStateProfileType = {
         {id: 4, postText: 'Good', likesCount: 8},
         {id: 5, postText: 'See you', likesCount: 3},
     ],
-    newText: ""
+    newText: "",
+    profile: null
+
 }
 
 const profilesReducer = (state: InitialStateProfileType = initialState, action: ActionsProfilesType): InitialStateProfileType => {
@@ -35,6 +45,8 @@ const profilesReducer = (state: InitialStateProfileType = initialState, action: 
             return {...state, posts: [...state.posts, newPost], newText: ""};
         case "UPDATE_NEW_TEXT":
             return {...state, newText: action.newText};
+        case "SET_USER_PROFILE":
+            return {...state, profile: action.profile}    
         default:
             return state;
     }
@@ -47,5 +59,9 @@ export const addPostAC = (postText: string) => {
 export const updateNewTextAC = (text: string) => {
     return  {type: "UPDATE_NEW_TEXT", newText: text} as const;
 };
+
+export const setUserProfileAC = (profile: ProfileType) => {
+    return {type: "SET_USER_PROFILE", profile} as const;
+}
 
 export default profilesReducer;

@@ -25,7 +25,7 @@ class Dialogs extends React.Component<DialogsPropsTypeStDis>{
                     <div className="users_container">
                         <h3>Dialogs</h3>
                         {
-                            this.props.dialogs.users.map(users => <UsersDialogs id={users.id} user={users.user}/>)
+                            this.props.dialogs.users.map(users => <UsersDialogs key={users.id} id={users.id} user={users.user}/>)
                         }
                     </div>
                     <div className="user_post">
@@ -37,7 +37,7 @@ class Dialogs extends React.Component<DialogsPropsTypeStDis>{
                             <button onClick={this.addMessageHandler}>Add message</button>
                         </div>
                         {
-                            this.props.dialogs.messages.map(message => <Dialog id={message.id} message={message.message}/>)
+                            this.props.dialogs.messages.map(message => <Dialog key={message.id} id={message.id} message={message.message}/>)
                         }
                     </div>
                 </div>

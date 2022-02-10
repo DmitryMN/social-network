@@ -30,7 +30,7 @@ const Users = (props: UsersPropsType) => {
             <div className="users_container">
                 {props.users.isFetching && <Preloader />}
                 <div>
-                    {pages.map(page => <span className={props.users.currentPage === page ? "selected" : ""}
+                    {pages.map(page => <span key={page} className={props.users.currentPage === page ? "selected" : ""}
                                              onClick={() => {
                                                  setCurrentPageHandler(page)
                                              }}>{page}</span>)}

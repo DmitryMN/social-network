@@ -28,7 +28,7 @@ class ProfilePosts extends React.Component<ProfilePropsTypeStDis> {
                 </div>
                 <div className="posts_wrapper">
                     {
-                        this.props.profiles.posts.map(post => <Post id={post.id} postText={post.postText} likesCount={post.likesCount}/>)
+                        this.props.profiles.posts.map(post => <Post key={post.id} id={post.id} postText={post.postText} likesCount={post.likesCount}/>)
                     }
                 </div>
             </div>

@@ -21,6 +21,9 @@ class ProfileUserApiContainer extends React.Component<CommonPropsType> {
 
     componentDidMount() {
         let userID = this.props.match.params.userId;
+        if(!userID) {
+            userID = "2";
+        }
         axios.get<ProfileUserType>("https://social-network.samuraijs.com/api/1.0/profile/" + userID).then((response) => {
             this.props.setUserProfile(response.data);
         });

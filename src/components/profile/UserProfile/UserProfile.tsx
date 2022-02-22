@@ -10,7 +10,8 @@ export const UserProfile = ({profiles}: ProfileUserNullType) => {
         <div className="user_profile">
             <div className="logo">
             </div>
-            <div>{profiles.aboutMe ? profiles.aboutMe: "is empty"}</div>
+            <div>Full Name: {profiles.fullName}</div>
+            <div>About me: {profiles.aboutMe ? profiles.aboutMe : "is empty"}</div>
         </div>
     );
 }

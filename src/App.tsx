@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderContainer from "./components/header/Header";
+import HeaderContainer from "./components/header/HeaderContainer";
 import Navbar from "./components/navbar/Navbar";
 import './App.css';
 import {Route} from "react-router-dom";

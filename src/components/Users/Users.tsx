@@ -6,7 +6,7 @@ import Preloader from "../preloader/Preloader";
 
 type UsersPropsType = {
     users: InitialStateType
-    onChangeFollowUnfollow: (id: number) => void
+    onChangeFollowUnfollow: (id: number, follow: boolean) => void
     setCurrentPage: (currentPage: number) => void
     onPageChanged: (pageNumber: number) => void
 }

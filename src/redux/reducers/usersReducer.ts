@@ -1,6 +1,3 @@
-import {type} from "os";
-
-
 export type LocationType = {
     city: string
     country: string
@@ -39,7 +36,7 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionUser
             return {...state, users: [...action.users]};
         case "FOLLOW_UNFOLLOW":
             return {...state, users: state.users.map(user => {
-                    return user.id === action.id ? {...user, followed: !user.followed} : user;
+                    return user.id === action.id ? {...user, followed: action.follow} : user;
                 })};
         case "SET_CURRENT_PAGE":
             return {...state, currentPage: action.currentPage};
@@ -50,8 +47,8 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionUser
     }
 }
 
-export const followUnfolllowAC = (id: number) => {
-    return {type: "FOLLOW_UNFOLLOW", id: id} as const;
+export const followUnfolllowAC = (id: number, follow: boolean) => {
+    return {type: "FOLLOW_UNFOLLOW", id, follow} as const;
 }
 
 export const setUsersAC = (users: arrUsersType) => {

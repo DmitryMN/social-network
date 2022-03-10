@@ -4,6 +4,7 @@ import {rootReducerType} from "../../redux/store/redux_store";
 import {connect} from "react-redux";
 import Users from "./Users";
 import axios from "axios";
+import {socialNetworkApi} from "../../api/api";
 
 type MapStateToPropsType = {
     users: InitialStateType
@@ -27,22 +28,25 @@ class UsersApiComponent extends React.Component<UsersApiComponentType> {
 
     componentDidMount() {
         this.props.setIsFetching();
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${this.props.users.pageSize}&page=${this.props.users.currentPage}`, {
-            withCredentials: true,
-            headers: { "API-KEY": "a8d9924c-0a09-4a81-9c01-6763abfe8005"},
-        }).then(
-            response => {
-                this.props.setUsers(response.data.items);
-                this.props.setIsFetching();
-            }
-        );
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${this.props.users.pageSize}&page=${this.props.users.currentPage}`, {
+        //     withCredentials: true,
+        //     headers: { "API-KEY": "a8d9924c-0a09-4a81-9c01-6763abfe8005"},
+        // }).then(
+        //     response => {
+        //         this.props.setUsers(response.data.items);
+        //         this.props.setIsFetching();
+        //     }
+        // );
+        socialNetworkApi.getUsers(this.props.users.pageSize, this.props.users.currentPage).then(data => {
+            this.props.setUsers(data.items);
+            this.props.setIsFetching();
+        });
     }
     onPageChanged(pageNumber: number) {
         this.props.setIsFetching();
         axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${this.props.users.pageSize}&page=${pageNumber}`, {
             withCredentials: true,
-        }).then(
-            response => {
+        }).then( response => {
                 this.props.setUsers(response.data.items);
                 this.props.setIsFetching();
             }

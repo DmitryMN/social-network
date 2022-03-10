@@ -8,17 +8,36 @@ const instance = axios.create({
     }
 });
 
-export const socialNetworkApi = {
+type AuthDataType = {
+    id: number
+    login: string
+    email: string
+}
+
+export type AuthResponseType = {
+    resultCode: number
+    messages: Array<string>
+    fieldsErrors: Array<string>
+    data: AuthDataType
+}
+
+export const usersApi = {
     getUsers(pageSize: number, currentPage: number) {
         debugger;
         return instance.get(`users/?count=${pageSize}&page=${currentPage}`).then(response => {
             return response.data;
         });
     },
-    getPage(pageSize: number, pageNumber: number) {
-        return instance.get(`users/?count=${pageSize}&page=${pageNumber}`).then(response => {
-            return response.data;
-        });
-    }
+    // getPage(pageSize: number, pageNumber: number) {
+    //     return instance.get(`users/?count=${pageSize}&page=${pageNumber}`).then(response => {
+    //         return response.data;
+    //     });
+    // }
 
 }
+
+export const authApi = {
+    authMe() {
+        return instance.get<AuthResponseType>(`auth/me`).then(response => response.data);
+    },
+};

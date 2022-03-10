@@ -4,6 +4,7 @@ import axios from "axios";
 import {setAuthUserData} from "../../redux/reducers/authReducer";
 import {connect} from "react-redux";
 import {rootReducerType} from "../../redux/store/redux_store";
+import {authApi, AuthResponseType} from "../../api/api";
 
 type AuthDataType = {
     id: number
@@ -11,7 +12,7 @@ type AuthDataType = {
     email: string
 }
 
-type ResponseDataType = {
+export type ResponseDataType = {
     resultCode: number
     messages: Array<string>
     fieldsErrors: Array<string>
@@ -28,10 +29,16 @@ type HeaderContainerPropsType = HeaderMapStatePropsType & { setAuthUserData: (id
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
 
     componentDidMount() {
-        axios.get<ResponseDataType>("https://social-network.samuraijs.com/api/1.0/auth/me",
-            { withCredentials: true}).then((request) => {
-            if(request.data.resultCode === 0) {
-                const {id, login, email} = request.data.data;
+        // axios.get<ResponseDataType>("https://social-network.samuraijs.com/api/1.0/auth/me",
+        //     { withCredentials: true}).then((request) => {
+        //     if(request.data.resultCode === 0) {
+        //         const {id, login, email} = request.data.data;
+        //         this.props.setAuthUserData(id, login, email);
+        //     }
+        // });
+        authApi.authMe().then(data => {
+            if(data.resultCode === 0) {
+                const {id, login, email} = data.data;
                 this.props.setAuthUserData(id, login, email);
             }
         })

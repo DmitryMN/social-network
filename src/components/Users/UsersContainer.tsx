@@ -4,7 +4,7 @@ import {rootReducerType} from "../../redux/store/redux_store";
 import {connect} from "react-redux";
 import Users from "./Users";
 import axios from "axios";
-import {socialNetworkApi} from "../../api/api";
+import {usersApi} from "../../api/api";
 
 type MapStateToPropsType = {
     users: InitialStateType
@@ -37,7 +37,7 @@ class UsersApiComponent extends React.Component<UsersApiComponentType> {
         //         this.props.setIsFetching();
         //     }
         // );
-        socialNetworkApi.getUsers(this.props.users.pageSize, this.props.users.currentPage).then(data => {
+        usersApi.getUsers(this.props.users.pageSize, this.props.users.currentPage).then(data => {
             this.props.setUsers(data.items);
             this.props.setIsFetching();
         });
@@ -51,7 +51,7 @@ class UsersApiComponent extends React.Component<UsersApiComponentType> {
         //         this.props.setIsFetching();
         //     }
         // );
-        socialNetworkApi.getPage(this.props.users.pageSize, pageNumber).then(data => {
+        usersApi.getUsers(this.props.users.pageSize, pageNumber).then(data => {
             this.props.setUsers(data.items);
             this.props.setIsFetching();
         });

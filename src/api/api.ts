@@ -14,7 +14,7 @@ type AuthDataType = {
     email: string
 }
 
-export type AuthResponseType = {
+type AuthMeType = {
     resultCode: number
     messages: Array<string>
     fieldsErrors: Array<string>
@@ -38,6 +38,6 @@ export const usersApi = {
 
 export const authApi = {
     authMe() {
-        return instance.get<AuthResponseType>(`auth/me`).then(response => response.data);
+        return instance.get<AuthMeType>(`auth/me`).then(response => response.data);
     },
 };

@@ -1,23 +1,10 @@
 import React from "react";
 import Header from "./Header";
-import axios from "axios";
 import {setAuthUserData} from "../../redux/reducers/authReducer";
 import {connect} from "react-redux";
 import {rootReducerType} from "../../redux/store/redux_store";
-import {authApi, AuthResponseType} from "../../api/api";
+import {authApi} from "../../api/api";
 
-type AuthDataType = {
-    id: number
-    login: string
-    email: string
-}
-
-export type ResponseDataType = {
-    resultCode: number
-    messages: Array<string>
-    fieldsErrors: Array<string>
-    data: AuthDataType
-}
 
 export type HeaderMapStatePropsType = {
     isAuth: boolean

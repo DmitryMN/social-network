@@ -4,6 +4,7 @@ import "./user.css";
 import userImg from "../../../images/user_img.png";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersApi} from "../../../api/api";
 
 type MapDispatchToPropsType1 = {
     onChangeFollowUnfollow: (id: number, follow: boolean) => void
@@ -20,27 +21,19 @@ type ResponseDataType = {
 const User = (props: UserPropsType) => {
 
     const followHandler = (id: number) => {
-        axios.post<ResponseDataType>(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
-            withCredentials: true,
-            headers: { "API-KEY": "a8d9924c-0a09-4a81-9c01-6763abfe8005"},
-        }).then(response => {
-            if(response.data.resultCode === 0) {
+        usersApi.follow(id).then(data => {
+            if(data.resultCode === 0) {
                 props.onChangeFollowUnfollow(id, true);
             }
-        });        
-        // props.onChangeFollowUnfollow(id);
+        });
     }
 
     const unfollowHandler = (id: number) => {
-        axios.delete<ResponseDataType>(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
-            withCredentials: true,
-            headers: { "API-KEY": "a8d9924c-0a09-4a81-9c01-6763abfe8005"},
-        }).then(response => {
-            if(response.data.resultCode === 0) {
+        usersApi.unfollow(id).then(data => {
+            if(data.resultCode === 0) {
                 props.onChangeFollowUnfollow(id, false);
             }
         });        
-        // props.onChangeFollowUnfollow(id);
     }
 
     return (

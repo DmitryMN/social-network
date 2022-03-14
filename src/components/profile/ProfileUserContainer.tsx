@@ -6,6 +6,7 @@ import { rootReducerType } from "../../redux/store/redux_store";
 import {ProfileUserType, setUserProfileAC} from "../../redux/reducers/profileReducer";
 import { withRouter } from "react-router-dom";
 import { RouteComponentProps } from "react-router-dom";
+import { profileApi } from "../../api/api";
 
 export type ProfileUserNullType = {
     profiles: ProfileUserType | null
@@ -24,8 +25,11 @@ class ProfileUserApiContainer extends React.Component<CommonPropsType> {
         if(!userID) {
             userID = "2";
         }
-        axios.get<ProfileUserType>("https://social-network.samuraijs.com/api/1.0/profile/" + userID).then((response) => {
-            this.props.setUserProfile(response.data);
+        // axios.get<ProfileUserType>("https://social-network.samuraijs.com/api/1.0/profile/" + userID).then((response) => {
+        //     this.props.setUserProfile(response.data);
+        // });
+        profileApi.getProfile(userID).then(data => {
+            this.props.setUserProfile(data);
         });
     }
     

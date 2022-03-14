@@ -1,4 +1,5 @@
 import axios, {AxiosResponse} from "axios";
+import {ProfileUserType} from "../redux/reducers/profileReducer"
 
 type AuthDataType = {
     id: number
@@ -37,6 +38,12 @@ export const usersApi = {
     },
     unfollow(id: number) {
         return instance.delete<FollowUnfollowType>(`follow/${id}`).then(response => response.data);
+    }
+}
+
+export const profileApi = {
+    getProfile(userId: string) {
+        return instance.get<ProfileUserType>(`profile/${userId}`).then(response => response.data);
     }
 }
 

@@ -6,7 +6,8 @@ import Preloader from "../preloader/Preloader";
 
 type UsersPropsType = {
     users: InitialStateType
-    onChangeFollowUnfollow: (id: number, follow: boolean) => void
+    onChangeFollow: (id: number, follow: boolean) => void
+    onChangeUnfollow: (id: number, follow: boolean) => void
     setCurrentPage: (currentPage: number) => void
     onPageChanged: (pageNumber: number) => void
 }
@@ -39,7 +40,7 @@ const Users = (props: UsersPropsType) => {
                     props.users.users.map(user => <User key={user.id} id={user.id}
                                                         followed={user.followed} name={user.name}
                                                         status={user.status}
-                                                        onChangeFollowUnfollow={props.onChangeFollowUnfollow}/>)
+                                                        onChangeFollow={props.onChangeFollow} onChangeUnfollow={props.onChangeUnfollow}/>)
                 }
             </div>
         </div>

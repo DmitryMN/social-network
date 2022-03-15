@@ -7,33 +7,31 @@ import axios from "axios";
 import {usersApi} from "../../../api/api";
 
 type MapDispatchToPropsType1 = {
-    onChangeFollowUnfollow: (id: number, follow: boolean) => void
+    onChangeFollow: (id: number, follow: boolean) => void
+    onChangeUnfollow: (id: number, follow: boolean) => void
 }
 
 type UserPropsType = UsersType & MapDispatchToPropsType1;
 
-type ResponseDataType = {
-    resultCode: number
-    messages: Array<string>,
-    data: {}
-}
 
 const User = (props: UserPropsType) => {
 
     const followHandler = (id: number) => {
-        usersApi.follow(id).then(data => {
-            if(data.resultCode === 0) {
-                props.onChangeFollowUnfollow(id, true);
-            }
-        });
+        // usersApi.follow(id).then(data => {
+        //     if(data.resultCode === 0) {
+        //         props.onChangeFollowUnfollow(id, true);
+        //     }
+        // });
+        props.onChangeFollow(id, true);
     }
 
     const unfollowHandler = (id: number) => {
-        usersApi.unfollow(id).then(data => {
-            if(data.resultCode === 0) {
-                props.onChangeFollowUnfollow(id, false);
-            }
-        });        
+        // usersApi.unfollow(id).then(data => {
+        //     if(data.resultCode === 0) {
+        //         props.onChangeUnfollow(id, false);
+        //     }
+        // });
+        props.onChangeUnfollow(id, false);        
     }
 
     return (

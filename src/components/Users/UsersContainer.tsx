@@ -1,5 +1,5 @@
 import React from "react";
-import {InitialStateType, setUsersAC, followUnfolllowAC, arrUsersType, setCurrentPageAC, setIsFetchingAC} from "../../redux/reducers/usersReducer";
+import {InitialStateType, setUsersAC, arrUsersType, setCurrentPageAC, setIsFetchingAC, followThunk, unfollowThunk} from "../../redux/reducers/usersReducer";
 import {rootReducerType} from "../../redux/store/redux_store";
 import {connect} from "react-redux";
 import Users from "./Users";
@@ -12,7 +12,8 @@ type MapStateToPropsType = {
 
 export type MapDispatchToPropsType = {
     setUsers: (users: arrUsersType) => void
-    onChangeFollowUnfollow: (id: number, follow: boolean) => void
+    onChangeFollow: (id: number, follow: boolean) => void
+    onChangeUnfollow: (id: number, follow: boolean) => void
     setCurrentPage: (currentPage: number) => void
     setIsFetching: () => void
 }
@@ -42,7 +43,7 @@ class UsersApiComponent extends React.Component<UsersApiComponentType> {
     }
     render() {
         return (
-            <Users users={this.props.users} onChangeFollowUnfollow={this.props.onChangeFollowUnfollow} setCurrentPage={this.props.setCurrentPage} onPageChanged={this.onPageChanged}/>
+            <Users users={this.props.users} onChangeFollow={this.props.onChangeFollow} onChangeUnfollow={this.props.onChangeUnfollow} setCurrentPage={this.props.setCurrentPage} onPageChanged={this.onPageChanged}/>
         );
     }
 }
@@ -54,6 +55,6 @@ const mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
 }
 
 export const UsersContainer = connect(mapStateToProps, {
-    setUsers: setUsersAC, onChangeFollowUnfollow: followUnfolllowAC,
+    setUsers: setUsersAC, onChangeFollow: followThunk, onChangeUnfollow: unfollowThunk,
     setCurrentPage: setCurrentPageAC, setIsFetching: setIsFetchingAC
 })(UsersApiComponent);

@@ -1,3 +1,6 @@
+import { Dispatch } from "redux";
+import { usersApi } from "../../api/api";
+
 export type LocationType = {
     city: string
     country: string
@@ -62,5 +65,26 @@ export const setCurrentPageAC = (currentPage: number) => {
 export const setIsFetchingAC = () => {
     return {type: "SET_IS_FETCHING"} as const;
 }
+
+export const followThunk = (id: number, follow: boolean) => {
+    return (dispatch: Dispatch) => {
+        usersApi.follow(id).then(data => {
+            if(data.resultCode === 0) {
+                dispatch(followUnfolllowAC(id, follow));
+            }
+        });
+    }
+}
+
+export const unfollowThunk = (id: number, follow: boolean) => {
+    return (dispatch: Dispatch) => {
+        usersApi.unfollow(id).then(data => {
+            if(data.resultCode === 0) {
+                dispatch(followUnfolllowAC(id, follow));
+            }
+        });
+    }
+}
+
 
 export default usersReducer;

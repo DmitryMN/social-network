@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from "axios";
-import {ProfileUserType} from "../redux/reducers/profileReducer"
+import {ProfileUserType} from "../redux/reducers/profileReducer";
+import {arrUsersType} from "../redux/reducers/usersReducer";
 
 type AuthDataType = {
     id: number
@@ -16,8 +17,14 @@ type AuthMeType = {
 
 type FollowUnfollowType = {
     resultCode: number
-    messages: Array<string>,
+    messages: Array<string>
     data: {}
+}
+
+type GetUsersType = {
+    items: arrUsersType
+    totalCount: number
+    error: string
 }
 
 const instance = axios.create({
@@ -31,7 +38,7 @@ const instance = axios.create({
 
 export const usersApi = {
     getUsers(pageSize: number, currentPage: number) {
-        return instance.get(`users/?count=${pageSize}&page=${currentPage}`).then(response => response.data);
+        return instance.get<GetUsersType>(`users/?count=${pageSize}&page=${currentPage}`).then(response => response.data);
     },
     follow(id: number) {
         return instance.post<FollowUnfollowType>(`follow/${id}`).then(response => response.data);

@@ -66,6 +66,15 @@ export const setIsFetchingAC = () => {
     return {type: "SET_IS_FETCHING"} as const;
 }
 
+
+export const setUsersThunk = (pageSize: number, currentPage: number) => {
+    return (dispatch: Dispatch) => {
+        usersApi.getUsers(pageSize, currentPage).then(data => {
+            dispatch(setUsersAC(data.items));
+        });
+    }
+}
+
 export const followThunk = (id: number, follow: boolean) => {
     return (dispatch: Dispatch) => {
         usersApi.follow(id).then(data => {

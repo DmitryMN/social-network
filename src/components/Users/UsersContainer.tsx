@@ -1,9 +1,8 @@
 import React from "react";
-import {InitialStateType, setUsersAC, arrUsersType, setCurrentPageAC, setIsFetchingAC, followThunk, unfollowThunk} from "../../redux/reducers/usersReducer";
+import {InitialStateType, setUsersAC, arrUsersType, setCurrentPageAC, setIsFetchingAC, followThunk, unfollowThunk, setUsersThunk} from "../../redux/reducers/usersReducer";
 import {rootReducerType} from "../../redux/store/redux_store";
 import {connect} from "react-redux";
 import Users from "./Users";
-import axios from "axios";
 import {usersApi} from "../../api/api";
 
 type MapStateToPropsType = {
@@ -16,6 +15,7 @@ export type MapDispatchToPropsType = {
     onChangeUnfollow: (id: number, follow: boolean) => void
     setCurrentPage: (currentPage: number) => void
     setIsFetching: () => void
+    setUsersThunk: (pageSize: number, currentPage: number) => void
 }
 
 export type UsersApiComponentType = MapStateToPropsType & MapDispatchToPropsType;
@@ -28,18 +28,20 @@ class UsersApiComponent extends React.Component<UsersApiComponentType> {
     }
 
     componentDidMount() {
-        this.props.setIsFetching();
-        usersApi.getUsers(this.props.users.pageSize, this.props.users.currentPage).then(data => {
-            this.props.setUsers(data.items);
-            this.props.setIsFetching();
-        });
+        // this.props.setIsFetching();
+        // usersApi.getUsers(this.props.users.pageSize, this.props.users.currentPage).then(data => {
+        //     this.props.setUsers(data.items);
+        //     this.props.setIsFetching();
+        // });
+        this.props.setUsersThunk(this.props.users.pageSize, this.props.users.currentPage);
     }
     onPageChanged(pageNumber: number) {
-        this.props.setIsFetching();
-        usersApi.getUsers(this.props.users.pageSize, pageNumber).then(data => {
-            this.props.setUsers(data.items);
-            this.props.setIsFetching();
-        });
+        // this.props.setIsFetching();
+        // usersApi.getUsers(this.props.users.pageSize, pageNumber).then(data => {
+        //     this.props.setUsers(data.items);
+        //     this.props.setIsFetching();
+        // });
+        this.props.setUsersThunk(this.props.users.pageSize, pageNumber);
     }
     render() {
         return (
@@ -56,5 +58,5 @@ const mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
 
 export const UsersContainer = connect(mapStateToProps, {
     setUsers: setUsersAC, onChangeFollow: followThunk, onChangeUnfollow: unfollowThunk,
-    setCurrentPage: setCurrentPageAC, setIsFetching: setIsFetchingAC
+    setCurrentPage: setCurrentPageAC, setIsFetching: setIsFetchingAC, setUsersThunk,
 })(UsersApiComponent);

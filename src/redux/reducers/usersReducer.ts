@@ -69,7 +69,9 @@ export const setIsFetchingAC = () => {
 
 export const setUsersThunk = (pageSize: number, currentPage: number) => {
     return (dispatch: Dispatch) => {
+        dispatch(setIsFetchingAC());
         usersApi.getUsers(pageSize, currentPage).then(data => {
+            dispatch(setIsFetchingAC());
             dispatch(setUsersAC(data.items));
         });
     }

@@ -1,4 +1,5 @@
-
+import {Dispatch} from "redux";
+import {profileApi} from "../../api/api";
 
 export type ProfileUserType = {
     userId: number
@@ -62,6 +63,14 @@ export const updateNewTextAC = (text: string) => {
 
 export const setUserProfileAC = (profile: ProfileUserType) => {
     return {type: "SET_USER_PROFILE", profile} as const;
+}
+
+export const setUserProfileThunk = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        profileApi.getProfile(userId).then(data => {
+            dispatch(setUserProfileAC(data));
+        });
+    }
 }
 
 export default profilesReducer;

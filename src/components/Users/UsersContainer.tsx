@@ -1,21 +1,20 @@
 import React from "react";
-import {InitialStateType, setUsersAC, arrUsersType, setCurrentPageAC, setIsFetchingAC, followThunk, unfollowThunk, setUsersThunk} from "../../redux/reducers/usersReducer";
+import {InitialStateType, setCurrentPageAC, setIsFetchingAC, followThunk, unfollowThunk, setUsersThunk} from "../../redux/reducers/usersReducer";
 import {rootReducerType} from "../../redux/store/redux_store";
 import {connect} from "react-redux";
 import Users from "./Users";
-import {usersApi} from "../../api/api";
 
 type MapStateToPropsType = {
     users: InitialStateType
 }
 
 export type MapDispatchToPropsType = {
-    setUsers: (users: arrUsersType) => void
+    setUsersThunk: (pageSize: number, currentPage: number) => void
     onChangeFollow: (id: number, follow: boolean) => void
     onChangeUnfollow: (id: number, follow: boolean) => void
     setCurrentPage: (currentPage: number) => void
     setIsFetching: () => void
-    setUsersThunk: (pageSize: number, currentPage: number) => void
+
 }
 
 export type UsersApiComponentType = MapStateToPropsType & MapDispatchToPropsType;
@@ -57,6 +56,6 @@ const mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
 }
 
 export const UsersContainer = connect(mapStateToProps, {
-    setUsers: setUsersAC, onChangeFollow: followThunk, onChangeUnfollow: unfollowThunk,
-    setCurrentPage: setCurrentPageAC, setIsFetching: setIsFetchingAC, setUsersThunk,
+    setUsersThunk, onChangeFollow: followThunk, onChangeUnfollow: unfollowThunk,
+    setCurrentPage: setCurrentPageAC, setIsFetching: setIsFetchingAC,
 })(UsersApiComponent);

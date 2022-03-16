@@ -1,9 +1,8 @@
 import React from "react";
-import axios from "axios";
 import {connect, ConnectedProps} from "react-redux";
 import {UserProfile} from "./UserProfile/UserProfile";
 import { rootReducerType } from "../../redux/store/redux_store";
-import {ProfileUserType, setUserProfileAC} from "../../redux/reducers/profileReducer";
+import {ProfileUserType, setUserProfileAC, setUserProfileThunk} from "../../redux/reducers/profileReducer";
 import { withRouter } from "react-router-dom";
 import { RouteComponentProps } from "react-router-dom";
 import { profileApi } from "../../api/api";
@@ -25,12 +24,10 @@ class ProfileUserApiContainer extends React.Component<CommonPropsType> {
         if(!userID) {
             userID = "2";
         }
-        // axios.get<ProfileUserType>("https://social-network.samuraijs.com/api/1.0/profile/" + userID).then((response) => {
-        //     this.props.setUserProfile(response.data);
+        // profileApi.getProfile(userID).then(data => {
+        //     this.props.setUserProfile(data);
         // });
-        profileApi.getProfile(userID).then(data => {
-            this.props.setUserProfile(data);
-        });
+        this.props.setUserProfileThunk(userID);
     }
     
     render() {
@@ -50,7 +47,7 @@ const mapStateToProps = (state: rootReducerType): ProfileUserNullType => {
 
 
 
-const connector = connect(mapStateToProps, {setUserProfile: setUserProfileAC});
+const connector = connect(mapStateToProps, {setUserProfileThunk});
 
 type ProfileUsersPropsType = ConnectedProps<typeof connector>;
 

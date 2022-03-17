@@ -2,10 +2,9 @@ import React from "react";
 import {connect, ConnectedProps} from "react-redux";
 import {UserProfile} from "./UserProfile/UserProfile";
 import { rootReducerType } from "../../redux/store/redux_store";
-import {ProfileUserType, setUserProfileAC, setUserProfileThunk} from "../../redux/reducers/profileReducer";
+import {ProfileUserType, setUserProfileThunk} from "../../redux/reducers/profileReducer";
 import { withRouter } from "react-router-dom";
 import { RouteComponentProps } from "react-router-dom";
-import { profileApi } from "../../api/api";
 
 export type ProfileUserNullType = {
     profiles: ProfileUserType | null

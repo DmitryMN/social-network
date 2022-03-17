@@ -6,6 +6,7 @@ import Users from "./Users";
 
 type MapStateToPropsType = {
     users: InitialStateType
+    followingInProgres: Array<number>
 }
 
 export type MapDispatchToPropsType = {
@@ -14,7 +15,6 @@ export type MapDispatchToPropsType = {
     onChangeUnfollow: (id: number, follow: boolean) => void
     setCurrentPage: (currentPage: number) => void
     setIsFetching: () => void
-
 }
 
 export type UsersApiComponentType = MapStateToPropsType & MapDispatchToPropsType;
@@ -44,14 +44,15 @@ class UsersApiComponent extends React.Component<UsersApiComponentType> {
     }
     render() {
         return (
-            <Users users={this.props.users} onChangeFollow={this.props.onChangeFollow} onChangeUnfollow={this.props.onChangeUnfollow} setCurrentPage={this.props.setCurrentPage} onPageChanged={this.onPageChanged}/>
+            <Users users={this.props.users} followingInProgres={this.props.followingInProgres} onChangeFollow={this.props.onChangeFollow} onChangeUnfollow={this.props.onChangeUnfollow} setCurrentPage={this.props.setCurrentPage} onPageChanged={this.onPageChanged}/>
         );
     }
 }
 
 const mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
     return {
-        users: state.users
+        users: state.users,
+        followingInProgres: state.users.followingInProgres
     }
 }
 

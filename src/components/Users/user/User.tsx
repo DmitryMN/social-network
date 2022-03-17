@@ -3,15 +3,13 @@ import {UsersType} from "../../../redux/reducers/usersReducer";
 import "./user.css";
 import userImg from "../../../images/user_img.png";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {usersApi} from "../../../api/api";
 
-type MapDispatchToPropsType1 = {
+type MapDispatchToPropsType = {
     onChangeFollow: (id: number, follow: boolean) => void
     onChangeUnfollow: (id: number, follow: boolean) => void
 }
 
-type UserPropsType = UsersType & MapDispatchToPropsType1;
+type UserPropsType = UsersType & {followingInProgres: Array<number>} & MapDispatchToPropsType;
 
 
 const User = (props: UserPropsType) => {
@@ -44,9 +42,9 @@ const User = (props: UserPropsType) => {
                 </div>
                 <div className="users_wrap_button">
                     {
-                        props.followed ? <button className="button"
+                        props.followed ? <button className="button" disabled={props.followingInProgres.some(id => id === props.id)}
                         onClick={() => unfollowHandler(props.id)}>Unfollow</button> :
-                        <button className="button"
+                        <button className="button" disabled={props.followingInProgres.some(id => id === props.id)}
                         onClick={() => followHandler(props.id)}>Follow</button>
                     }
                 </div>

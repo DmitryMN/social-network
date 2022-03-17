@@ -1,9 +1,8 @@
 import React from "react";
 import Header from "./Header";
-import {setAuthUserData, setAuthUserThunk} from "../../redux/reducers/authReducer";
+import {setAuthUserThunk} from "../../redux/reducers/authReducer";
 import {connect} from "react-redux";
 import {rootReducerType} from "../../redux/store/redux_store";
-import {authApi} from "../../api/api";
 
 
 export type HeaderMapStatePropsType = {

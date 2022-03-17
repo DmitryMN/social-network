@@ -19,21 +19,24 @@ export type InitialStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgres: Array<number>
 }
 
 export type arrUsersType = Array<UsersType>;
 
-export type ActionUsersType = ReturnType<typeof followUnfolllowAC> | ReturnType<typeof setUsersAC> | ReturnType<typeof setCurrentPageAC> | ReturnType<typeof setIsFetchingAC>;
+export type ActionUsersType = ReturnType<typeof followUnfolllowAC> | ReturnType<typeof setUsersAC> | ReturnType<typeof setCurrentPageAC> 
+| ReturnType<typeof setIsFetchingAC> | ReturnType<typeof followingInProgresAC>;
 
 const initialState: InitialStateType= {
     users: [],
     pageSize: 10,
     totalUsersCount: 100,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgres: [],
 }
 
-const usersReducer = (state: InitialStateType = initialState, action: ActionUsersType) => {
+const usersReducer = (state: InitialStateType = initialState, action: ActionUsersType): InitialStateType => {
     switch (action.type) {
         case "SET_USERS":
             return {...state, users: [...action.users]};
@@ -44,7 +47,11 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionUser
         case "SET_CURRENT_PAGE":
             return {...state, currentPage: action.currentPage};
         case "SET_IS_FETCHING":
-            return {...state, isFetching: !state.isFetching}   
+            return {...state, isFetching: !state.isFetching};
+        case "TOGGLE_FOLLOWING_PROGRESS":
+            return {...state, followingInProgres: action.isFetch ? 
+                [...state.followingInProgres, action.userId] 
+                : state.followingInProgres.filter(id => id !== action.userId)}    
         default:
             return state;
     }
@@ -55,17 +62,20 @@ export const followUnfolllowAC = (id: number, follow: boolean) => {
 }
 
 export const setUsersAC = (users: arrUsersType) => {
-    return {type: "SET_USERS", users: users} as const;
+    return {type: "SET_USERS", users} as const;
 }
 
 export const setCurrentPageAC = (currentPage: number) => {
-    return  {type: "SET_CURRENT_PAGE", currentPage: currentPage} as const;
+    return  {type: "SET_CURRENT_PAGE", currentPage} as const;
 }
 
 export const setIsFetchingAC = () => {
     return {type: "SET_IS_FETCHING"} as const;
 }
 
+export const followingInProgresAC = (userId: number, isFetch: boolean, ) => {
+    return {type: "TOGGLE_FOLLOWING_PROGRESS", userId, isFetch} as const;
+}
 
 export const setUsersThunk = (pageSize: number, currentPage: number) => {
     return (dispatch: Dispatch) => {
@@ -79,9 +89,11 @@ export const setUsersThunk = (pageSize: number, currentPage: number) => {
 
 export const followThunk = (id: number, follow: boolean) => {
     return (dispatch: Dispatch) => {
+        dispatch(followingInProgresAC(id, true));
         usersApi.follow(id).then(data => {
             if(data.resultCode === 0) {
                 dispatch(followUnfolllowAC(id, follow));
+                dispatch(followingInProgresAC(id, false));
             }
         });
     }
@@ -89,9 +101,11 @@ export const followThunk = (id: number, follow: boolean) => {
 
 export const unfollowThunk = (id: number, follow: boolean) => {
     return (dispatch: Dispatch) => {
+        dispatch(followingInProgresAC(id, true));
         usersApi.unfollow(id).then(data => {
             if(data.resultCode === 0) {
                 dispatch(followUnfolllowAC(id, follow));
+                dispatch(followingInProgresAC(id, false));
             }
         });
     }

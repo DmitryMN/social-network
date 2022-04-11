@@ -3,6 +3,7 @@ import Dialog from "./dialog/Dialog";
 import UsersDialogs from "./usersDialogs/UsersDialogs";
 import "./dialogs.css";
 import {DialogsPropsTypeStDis} from "./DialogsContainer";
+import {Redirect} from "react-router-dom";
 
 class Dialogs extends React.Component<DialogsPropsTypeStDis>{
 
@@ -19,6 +20,8 @@ class Dialogs extends React.Component<DialogsPropsTypeStDis>{
     }
 
     render() {
+        if(!this.props.isAuth) return <Redirect to='/login' />
+        
         return(
             <div className="dialogs">
                 <div className="dialogs_container">

@@ -6,6 +6,7 @@ import {InitialStateDialogsType, addNewMessageAC, updateNewMessageAC} from "../.
 
 type MapStateToPropsType = {
     dialogs: InitialStateDialogsType
+    isAuth: boolean
 }
 
 type MapDispatchToProps = {
@@ -16,7 +17,10 @@ type MapDispatchToProps = {
 export type DialogsPropsTypeStDis = MapStateToPropsType & MapDispatchToProps;
 
 const mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
-    return { dialogs: state.dialogs }
+    return { 
+        dialogs: state.dialogs,
+        isAuth: state.auth.isAuth,
+     }
 }
 
 

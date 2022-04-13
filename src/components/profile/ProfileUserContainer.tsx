@@ -4,6 +4,7 @@ import {UserProfile} from "./UserProfile/UserProfile";
 import { rootReducerType } from "../../redux/store/redux_store";
 import {ProfileUserType, setUserProfileThunk} from "../../redux/reducers/profileReducer";
 import { withRouter, RouteComponentProps} from "react-router-dom";
+import { compose } from "redux";
 
 export type ProfileUserNullType = {
     profiles: ProfileUserType | null
@@ -22,9 +23,6 @@ class ProfileUserApiContainer extends React.Component<CommonPropsType> {
         if(!userID) {
             userID = "2";
         }
-        // profileApi.getProfile(userID).then(data => {
-        //     this.props.setUserProfile(data);
-        // });
         this.props.setUserProfileThunk(userID);
     }
     
@@ -43,14 +41,19 @@ const mapStateToProps = (state: rootReducerType): ProfileUserNullType => {
     }
 }
 
-
-
 const connector = connect(mapStateToProps, {setUserProfileThunk});
 
 type ProfileUsersPropsType = ConnectedProps<typeof connector>;
 
-const WithUrlDataContainerComponent = withRouter(ProfileUserApiContainer);
+export default compose<React.ComponentType>(
+    connector,
+    withRouter,
+)(ProfileUserApiContainer);
 
-export default connector(WithUrlDataContainerComponent);
+
+
+// const WithUrlDataContainerComponent = withRouter(ProfileUserApiContainer);
+
+// export default connector(WithUrlDataContainerComponent);
 
 

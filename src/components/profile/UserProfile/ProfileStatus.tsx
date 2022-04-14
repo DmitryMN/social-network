@@ -14,8 +14,16 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType, Profi
     constructor(props: ProfileStatusPropsType) {
         super(props);
         this.state = {
-            editMode: false
+            editMode: true
         }
+    }
+
+    activateEditMode = () => {
+        this.setState({editMode: false});
+    }
+    
+    deactivateEditMode = () => {
+        this.setState({editMode: true});
     }
 
     render() {
@@ -24,10 +32,10 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType, Profi
                 {
                     this.state.editMode ?
                         <div>
-                            <span>{this.props.status}</span>
+                            <span onDoubleClick={this.activateEditMode}>{"hello"}</span>
                         </div> :
                         <div>
-                            <input value={this.props.status} />
+                            <input autoFocus={true} onBlur={this.deactivateEditMode} value={this.props.status} />
                         </div>
                 }
             </div>

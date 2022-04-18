@@ -1,4 +1,3 @@
-import { type } from "os";
 import React from "react";
 
 type ProfileStatusPropsType = {
@@ -32,7 +31,7 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType, Profi
                 {
                     this.state.editMode ?
                         <div>
-                            <span onDoubleClick={this.activateEditMode}>{"hello"}</span>
+                            <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
                         </div> :
                         <div>
                             <input autoFocus={true} onBlur={this.deactivateEditMode} value={this.props.status} />

@@ -17,10 +17,12 @@ export type PostType = {
 export type InitialStateProfileType = {
     posts: Array<PostType>
     newText: string
-    profile: ProfileUserType | null
+    profile: ProfileUserType | null,
+    status: string
 }
 
-export type ActionsProfilesType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewTextAC> | ReturnType<typeof setUserProfileAC>;
+export type ActionsProfilesType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewTextAC> 
+    | ReturnType<typeof setUserProfileAC> | ReturnType<typeof setStatusAC>;
 
 const initialState: InitialStateProfileType = {
     posts: [
@@ -31,8 +33,8 @@ const initialState: InitialStateProfileType = {
         {id: 5, postText: 'See you', likesCount: 3},
     ],
     newText: "",
-    profile: null
-
+    profile: null,
+    status: "",
 }
 
 const profilesReducer = (state: InitialStateProfileType = initialState, action: ActionsProfilesType): InitialStateProfileType => {
@@ -47,7 +49,9 @@ const profilesReducer = (state: InitialStateProfileType = initialState, action: 
         case "UPDATE_NEW_TEXT":
             return {...state, newText: action.newText};
         case "SET_USER_PROFILE":
-            return {...state, profile: action.profile}    
+            return {...state, profile: action.profile};
+        case "SET_STATUS":
+            return {...state, status: action.status}
         default:
             return state;
     }
@@ -65,11 +69,23 @@ export const setUserProfileAC = (profile: ProfileUserType) => {
     return {type: "SET_USER_PROFILE", profile} as const;
 }
 
+export const setStatusAC = (status: string) => {
+    return {type: "SET_STATUS", status} as const;
+}
+
 export const setUserProfileThunk = (userId: string) => {
     return (dispatch: Dispatch) => {
         profileApi.getProfile(userId).then(data => {
             dispatch(setUserProfileAC(data));
         });
+    }
+}
+
+export const setStatusThunk = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        profileApi.getStatus(userId).then(status => {
+            dispatch(setStatusAC(status));
+        })
     }
 }
 

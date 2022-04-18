@@ -57,12 +57,11 @@ export const profileApi = {
         return instance.get(`profile/status/${userId}`).then(response => response.data);
     },
     updateStatus(status: string) {
-        return instance.put(`profile/status/`, {status: status}).then(response => response.data);;
+        return instance.put(`profile/status/`, {status: status}).then(response => response.data);
     },
 }
-
 export const authApi = {
     authMe() {
         return instance.get<AuthMeType>(`auth/me`).then(response => response.data);
-    },
-};
+    }
+}

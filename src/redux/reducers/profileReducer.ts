@@ -89,4 +89,14 @@ export const setStatusThunk = (userId: string) => {
     }
 }
 
+export const updateStatusThunk = (status: string) => {
+    return(dispatch: Dispatch) => {
+        profileApi.updateStatus(status).then(data => {
+            if(data.resultCode === 0) {
+                dispatch(setStatusAC(status));
+            }
+        });
+    }
+}
+
 export default profilesReducer;

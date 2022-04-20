@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from "axios";
+import axios from "axios";
 import {ProfileUserType} from "../redux/reducers/profileReducer";
 import {arrUsersType} from "../redux/reducers/usersReducer";
 
@@ -15,7 +15,7 @@ type AuthMeType = {
     data: AuthDataType
 }
 
-type FollowUnfollowType = {
+type GeneralRequestResultType = {
     resultCode: number
     messages: Array<string>
     data: {}
@@ -41,10 +41,10 @@ export const usersApi = {
         return instance.get<GetUsersType>(`users/?count=${pageSize}&page=${currentPage}`).then(response => response.data);
     },
     follow(id: number) {
-        return instance.post<FollowUnfollowType>(`follow/${id}`).then(response => response.data);
+        return instance.post<GeneralRequestResultType>(`follow/${id}`).then(response => response.data);
     },
     unfollow(id: number) {
-        return instance.delete<FollowUnfollowType>(`follow/${id}`).then(response => response.data);
+        return instance.delete<GeneralRequestResultType>(`follow/${id}`).then(response => response.data);
     }
 }
 
@@ -57,7 +57,7 @@ export const profileApi = {
         return instance.get(`profile/status/${userId}`).then(response => response.data);
     },
     updateStatus(status: string) {
-        return instance.put(`profile/status/`, {status: status}).then(response => response.data);
+        return instance.put<GeneralRequestResultType>(`profile/status/`, {status: status}).then(response => response.data);
     },
 }
 export const authApi = {

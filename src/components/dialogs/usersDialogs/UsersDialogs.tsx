@@ -5,10 +5,6 @@ import {UserType} from "../../../redux/reducers/dialogsReducer";
 
 class UsersDialogs extends React.Component<UserType> {
 
-    constructor(props: UserType) {
-        super(props);
-    }
-
     render() {
         return(
             <div key={this.props.id} className="users_dialogs">

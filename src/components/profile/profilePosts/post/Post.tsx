@@ -5,9 +5,7 @@ import {PostType} from "../../../../redux/reducers/profileReducer";
 
 
 class Post extends React.Component<PostType> {
-    constructor(props: PostType) {
-        super(props);
-    }
+
     render() {
         return(
             <div key={this.props.id} className="post">

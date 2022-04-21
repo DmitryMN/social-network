@@ -31,7 +31,7 @@ class ProfileUserApiContainer extends React.Component<CommonPropsType> {
     render() {
         return(
             <>
-              <UserProfile profiles={this.props.profiles} status={this.props.status}/>
+              <UserProfile profiles={this.props.profiles} status={this.props.status} updateStatusThunk={this.props.updateStatusThunk}/>
             </>
         );
     }
